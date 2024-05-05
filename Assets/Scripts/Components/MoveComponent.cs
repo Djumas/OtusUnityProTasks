@@ -1,4 +1,5 @@
 using UnityEngine;
+using Vector3 = System.Numerics.Vector3;
 
 namespace ShootEmUp
 {
@@ -17,7 +18,12 @@ namespace ShootEmUp
             _horizontalDirection = horizontalDirection;
         }
 
-        public void MoveByRigidbodyVelocity(Vector2 vector)
+        public void MoveInstantly(Vector2 vector)
+        {
+            MoveByRigidbodyVelocity(vector);
+        }
+
+        private void MoveByRigidbodyVelocity(Vector2 vector)
         {
             var nextPosition = this.rigidbody2D.position + vector * this.speed;
             this.rigidbody2D.MovePosition(nextPosition);
