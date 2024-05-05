@@ -1,4 +1,5 @@
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace ShootEmUp
@@ -6,10 +7,17 @@ namespace ShootEmUp
     public sealed class HitPointsComponent : MonoBehaviour
     {
         public event Action<GameObject> hpEmpty;
-        
-        [SerializeField] private int hitPoints;
-        
-        public bool IsHitPointsExists() {
+
+        [SerializeField] private int maxHitPoints;
+        [ShowInInspector] private int hitPoints;
+
+        public void Init()
+        {
+            hitPoints = maxHitPoints;
+        }
+
+        public bool IsHitPointsExists()
+        {
             return this.hitPoints > 0;
         }
 

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5568771391735819372}
   - component: {fileID: 5568771391735819373}
   - component: {fileID: 5568771391735819374}
+  - component: {fileID: -969684155461554267}
   - component: {fileID: 8186052948131603766}
   - component: {fileID: 6896809305229427933}
   m_Layer: 11
@@ -85,7 +86,7 @@ SpriteRenderer:
   m_Sprite: {fileID: 21300000, guid: 829f150aef2af8f4ab4e9ee078c5f4a6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 1.02, y: 1.41}
   m_AdaptiveModeThreshold: 0.5
@@ -169,7 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5daa1be9cc40a78a2f07cd53e5b47e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: 3
+  maxHitPoints: 3
 --- !u!114 &5568771391735819374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,7 +183,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce164c84a74a425f8d2e82764aef9e34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bulletSystem: {fileID: 0}
+  _bulletConfig: {fileID: 11400000, guid: 2c7f8eda3ba46b8408d5da8f81b6ddad, type: 2}
   firePoint: {fileID: 3195880656587174614}
+--- !u!114 &-969684155461554267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559606060570185700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 842926db77fbe5c439a8b5883f1dcbc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveAgent: {fileID: 8186052948131603766}
+  _attackAgent: {fileID: 6896809305229427933}
+  _hitPointsComponent: {fileID: 5568771391735819373}
 --- !u!114 &8186052948131603766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,7 +227,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponComponent: {fileID: 5568771391735819374}
-  moveAgent: {fileID: 8186052948131603766}
   countdown: 1
 --- !u!1 &2239154907127902911
 GameObject:

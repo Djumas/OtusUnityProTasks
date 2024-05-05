@@ -10,11 +10,9 @@ namespace ShootEmUp
         [NonSerialized] public bool isPlayer;
         [NonSerialized] public int damage;
 
-        [SerializeField]
-        private new Rigidbody2D rigidbody2D;
+        [SerializeField] private new Rigidbody2D rigidbody2D;
 
-        [SerializeField]
-        private SpriteRenderer spriteRenderer;
+        [SerializeField] private SpriteRenderer spriteRenderer;
 
         private void OnCollisionEnter2D(Collision2D collision)
         {

@@ -6,6 +6,8 @@ namespace ShootEmUp
     {
         internal static void DealDamage(Bullet bullet, GameObject other)
         {
+            //Debug.Log("Try to hit");
+
             if (!other.TryGetComponent(out TeamComponent team))
             {
                 return;
@@ -15,6 +17,7 @@ namespace ShootEmUp
             {
                 return;
             }
+
 
             if (other.TryGetComponent(out HitPointsComponent hitPoints))
             {
