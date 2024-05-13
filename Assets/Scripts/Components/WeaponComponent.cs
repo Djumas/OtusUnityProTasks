@@ -1,17 +1,18 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ShootEmUp
 {
     public sealed class WeaponComponent : MonoBehaviour
     {
-        [SerializeField] BulletSystem _bulletSystem;
-        [SerializeField] BulletConfig _bulletConfig;
+        [SerializeField] BulletSpawnSystem bulletSpawnSystem;
+        [SerializeField] BulletConfig bulletConfig;
         [SerializeField] private Transform firePoint;
 
 
-        public void Init(BulletSystem bulletSystem)
+        public void Init(BulletSpawnSystem bulletSpawnSystem)
         {
-            _bulletSystem = bulletSystem;
+            this.bulletSpawnSystem = bulletSpawnSystem;
         }
 
         public void Fire(Vector3 targetPosition, bool isPlayer)
@@ -19,14 +20,14 @@ namespace ShootEmUp
             var startPosition = (Vector2)firePoint.position;
             var vector = (Vector2)targetPosition - startPosition;
             var direction = vector.normalized;
-            _bulletSystem.FlyBulletByArgs(new BulletSystem.Args
+            bulletSpawnSystem.FlyBulletByArgs(new BulletSpawnArgs
             {
                 isPlayer = isPlayer,
-                physicsLayer = (int)this._bulletConfig.physicsLayer,
-                color = this._bulletConfig.color,
-                damage = this._bulletConfig.damage,
+                physicsLayer = (int)bulletConfig.physicsLayer,
+                color = bulletConfig.color,
+                damage = bulletConfig.damage,
                 position = startPosition,
-                velocity = direction * this._bulletConfig.speed
+                velocity = direction * bulletConfig.speed
             });
         }
 

@@ -11,11 +11,11 @@ namespace ShootEmUp
         [SerializeField]
         private float speed = 5.0f;
 
-        private float _horizontalDirection = 0;
+        private float horizontalDirection;
 
         public void Move(float horizontalDirection)
         {
-            _horizontalDirection = horizontalDirection;
+            this.horizontalDirection = horizontalDirection;
         }
 
         public void MoveInstantly(Vector2 vector)
@@ -25,13 +25,13 @@ namespace ShootEmUp
 
         private void MoveByRigidbodyVelocity(Vector2 vector)
         {
-            var nextPosition = this.rigidbody2D.position + vector * this.speed;
-            this.rigidbody2D.MovePosition(nextPosition);
+            var nextPosition = rigidbody2D.position + vector * speed;
+            rigidbody2D.MovePosition(nextPosition);
         }
 
         private void FixedUpdate()
         {
-            MoveByRigidbodyVelocity(new Vector2(_horizontalDirection, 0) * Time.fixedDeltaTime);
+            MoveByRigidbodyVelocity(new Vector2(horizontalDirection, 0) * Time.fixedDeltaTime);
         }
     }
 }

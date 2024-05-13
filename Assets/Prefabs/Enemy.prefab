@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52112fd3e5414bf991b1d54804cb28f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayer: 0
+  <IsPlayer>k__BackingField: 0
 --- !u!114 &5568771391735819372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,8 +183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce164c84a74a425f8d2e82764aef9e34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletSystem: {fileID: 0}
-  _bulletConfig: {fileID: 11400000, guid: 2c7f8eda3ba46b8408d5da8f81b6ddad, type: 2}
+  bulletSpawnSystem: {fileID: 0}
+  bulletConfig: {fileID: 11400000, guid: 2c7f8eda3ba46b8408d5da8f81b6ddad, type: 2}
   firePoint: {fileID: 3195880656587174614}
 --- !u!114 &-969684155461554267
 MonoBehaviour:
@@ -198,9 +198,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 842926db77fbe5c439a8b5883f1dcbc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveAgent: {fileID: 8186052948131603766}
-  _attackAgent: {fileID: 6896809305229427933}
-  _hitPointsComponent: {fileID: 5568771391735819373}
+  moveAgent: {fileID: 8186052948131603766}
+  attackAgent: {fileID: 6896809305229427933}
+  hitPointsComponent: {fileID: 5568771391735819373}
 --- !u!114 &8186052948131603766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,6 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bdb5771141e4cf18c434a69ec116e09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveTreshhold: 0.25
   moveComponent: {fileID: 5568771391735819372}
 --- !u!114 &6896809305229427933
 MonoBehaviour:

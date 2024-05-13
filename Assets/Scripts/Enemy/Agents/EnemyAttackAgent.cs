@@ -18,22 +18,22 @@ namespace ShootEmUp
 
         public void Reset()
         {
-            this.currentTime = this.countdown;
+            currentTime = countdown;
         }
 
         private void FixedUpdate()
         {
-            this.currentTime -= Time.fixedDeltaTime;
-            if (this.currentTime <= 0)
+            currentTime -= Time.fixedDeltaTime;
+            if (currentTime <= 0)
             {
-                this.Fire();
-                this.currentTime += this.countdown;
+                Fire();
+                currentTime += countdown;
             }
         }
 
         private void Fire()
         {
-            this.weaponComponent.Fire(target.transform.position, false);
+            weaponComponent.Fire(target.transform.position, false);
         }
     }
 }

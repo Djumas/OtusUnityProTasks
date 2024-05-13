@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ShootEmUp
 {
@@ -9,31 +10,31 @@ namespace ShootEmUp
     
     public class EnemyAIAgent : MonoBehaviour
     {
-        [SerializeField] private EnemyMoveAgent _moveAgent;
-        [SerializeField] private EnemyAttackAgent _attackAgent;
-        [SerializeField] private HitPointsComponent _hitPointsComponent;
+        [SerializeField] private EnemyMoveAgent moveAgent;
+        [SerializeField] private EnemyAttackAgent attackAgent;
+        [SerializeField] private HitPointsComponent hitPointsComponent;
 
         private void Awake()
         {
-            _attackAgent.enabled = false;
+            attackAgent.enabled = false;
         }
 
         private void FixedUpdate()
         {
-            if (!this._moveAgent.IsReached)
+            if (!moveAgent.IsReached)
             {
                 return;
             }
 
-            if (!_hitPointsComponent.IsHitPointsExists())
+            if (!hitPointsComponent.IsHitPointsExists())
             {
-                _attackAgent.enabled = false;
+                attackAgent.enabled = false;
                 return;
             }
 
-            if (!_attackAgent.enabled)
+            if (!attackAgent.enabled)
             {
-                _attackAgent.enabled = true;
+                attackAgent.enabled = true;
             }
         }
     }

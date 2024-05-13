@@ -12,6 +12,8 @@ namespace ShootEmUp
 
         [SerializeField] private Transform worldTransform;
 
+        [SerializeField] private BulletSpawnSystem bulletSpawnSystem;
+
         [Header("Pool")] 
         [SerializeField] private Transform container;
 
@@ -23,36 +25,37 @@ namespace ShootEmUp
         {
             for (var i = 0; i < maxEnemiesCount; i++)
             {
-                var enemy = Instantiate(this.enemyPrefab, this.container);
-                this.enemyPool.Enqueue(enemy);
+                var enemy = Instantiate(enemyPrefab, container);
+                enemyPool.Enqueue(enemy);
             }
         }
 
-        public GameObject SpawnEnemy(GameObject target)
+        public bool TryGetEnemy(GameObject target, out GameObject enemy)
         {
-            if (!this.enemyPool.TryDequeue(out var enemy))
+            if (!enemyPool.TryDequeue(out enemy))
             {
-                //Reached max count.
-                return null;
+                return false;
+                
             }
+            enemy.transform.SetParent(worldTransform);
 
-            enemy.transform.SetParent(this.worldTransform);
-
-            var spawnPosition = this.enemyPositions.RandomSpawnPosition();
+            var spawnPosition = enemyPositions.RandomSpawnPosition();
             enemy.transform.position = spawnPosition.position;
 
-            var attackPosition = this.enemyPositions.RandomAttackPosition();
+            var attackPosition = enemyPositions.RandomAttackPosition();
             enemy.GetComponent<EnemyMoveAgent>().SetDestination(attackPosition.position);
 
             enemy.GetComponent<EnemyAttackAgent>().SetTarget(target);
-            
-            return enemy;
-        }
+            enemy.GetComponent<WeaponComponent>().Init(bulletSpawnSystem);
+            enemy.GetComponent<HitPointsComponent>().Init();
+            return true;
+            }
 
-        public void UnspawnEnemy(GameObject enemy)
+
+        public void Release(GameObject enemy)
         {
-            enemy.transform.SetParent(this.container);
-            this.enemyPool.Enqueue(enemy);
+            enemy.transform.SetParent(container);
+            enemyPool.Enqueue(enemy);
         }
     }
 }
