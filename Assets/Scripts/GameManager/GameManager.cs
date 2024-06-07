@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -18,12 +19,14 @@ namespace ShootEmUp
 
     public sealed class GameManager : MonoBehaviour
     {
+        [SerializeField] private int startDelay = 3;
+        
         private static List<IGameListener> _gameListeners = new();
         private static List<IGameUpdateListener> _gameUpdateListeners = new();
         private static List<IGameFixedUpdateListener> _gameFixedUpdateListeners = new();
 
         private GameState _gameState = GameState.Off;
-
+        
         public static void Register(IGameListener gameListener)
         {
             _gameListeners.Add(gameListener);
@@ -66,8 +69,16 @@ namespace ShootEmUp
                 Debug.Log("Game is not off");
                 return;
             }
-            
-            Debug.Log("Game started!");
+            StartCoroutine(WaitAndStart());
+        }
+
+        private IEnumerator WaitAndStart()
+        {
+            for (int i = 0; i < startDelay; i++)
+            {
+                Debug.Log($"Game starting in...{startDelay - i}");
+                yield return new WaitForSeconds(1);
+            }
 
             foreach (var gameListener in _gameListeners)
             {
@@ -76,10 +87,11 @@ namespace ShootEmUp
                     gameFinishListener.OnStartGame();
                 }
             }
-            
             _gameState = GameState.Playing;
+            Debug.Log("Game started!");
         }
-        
+
+
         public void PauseGame()
         {
 
