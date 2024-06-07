@@ -6,7 +6,6 @@ namespace ShootEmUp
     public class BulletPool : MonoBehaviour
     {
         [SerializeField] private int initialCount = 50;
-
         [SerializeField] private Transform container;
         [SerializeField] private Bullet prefab;
         [SerializeField] private Transform worldTransform;

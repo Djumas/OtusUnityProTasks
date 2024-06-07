@@ -2,38 +2,51 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyAttackAgent : MonoBehaviour
+    public sealed class EnemyAttackAgent : MonoBehaviour, IGameFixedUpdateListener
     {
-
         [SerializeField] private WeaponComponent weaponComponent;
         [SerializeField] private float countdown;
 
-        private GameObject target;
-        private float currentTime;
+        private GameObject _target;
+        private float _currentTime;
+        public bool IsActive { get; private set; }
+
+        private void Awake()
+        {
+            IGameListener.Register(this);
+        }
+
+        public void SetActive(bool state)
+        {
+            IsActive = state;
+        }
 
         public void SetTarget(GameObject target)
         {
-            this.target = target;
+            this._target = target;
         }
 
         public void Reset()
         {
-            currentTime = countdown;
+            _currentTime = countdown;
         }
 
-        private void FixedUpdate()
+        public void OnFixedUpdateGame(float fixedDeltaTime)
         {
-            currentTime -= Time.fixedDeltaTime;
-            if (currentTime <= 0)
+            if (IsActive)
             {
-                Fire();
-                currentTime += countdown;
+                _currentTime -= fixedDeltaTime;
+                if (_currentTime <= 0)
+                {
+                    Fire();
+                    _currentTime += countdown;
+                }
             }
         }
 
         private void Fire()
         {
-            weaponComponent.Fire(target.transform.position, false);
+            weaponComponent.Fire(_target.transform.position, false);
         }
     }
 }

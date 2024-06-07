@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52112fd3e5414bf991b1d54804cb28f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <IsPlayer>k__BackingField: 0
+  <IsPlayer>k__BackingField: 1
 --- !u!114 &3926786963732877808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
-  _hitPointsComponent: {fileID: 3926786964091724599}
+  hitPointsComponent: {fileID: 3926786964091724599}
 --- !u!114 &6176353078537096910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b406fb50e82849699e20302f376a75c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponComponent: {fileID: 0}
+  weaponComponent: {fileID: 3926786964091724598}
   inputSystem: {fileID: 0}
 --- !u!1 &3926786963072264211
 GameObject:

@@ -1,14 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace ShootEmUp
 {
-
-    
-    public class EnemyAIAgent : MonoBehaviour
+    public class EnemyAIAgent : MonoBehaviour, IGameFixedUpdateListener
     {
         [SerializeField] private EnemyMoveAgent moveAgent;
         [SerializeField] private EnemyAttackAgent attackAgent;
@@ -16,10 +10,11 @@ namespace ShootEmUp
 
         private void Awake()
         {
-            attackAgent.enabled = false;
+            attackAgent.SetActive(false);
+            IGameListener.Register(this);
         }
 
-        private void FixedUpdate()
+        public void OnFixedUpdateGame(float deltaTime)
         {
             if (!moveAgent.IsReached)
             {
@@ -28,14 +23,16 @@ namespace ShootEmUp
 
             if (!hitPointsComponent.IsHitPointsExists())
             {
-                attackAgent.enabled = false;
+                attackAgent.SetActive(false);
                 return;
             }
 
-            if (!attackAgent.enabled)
+            if (!attackAgent.IsActive)
             {
-                attackAgent.enabled = true;
+                Debug.Log("Enemy activated");
+                attackAgent.SetActive(true);
             }
         }
+
     }
 }

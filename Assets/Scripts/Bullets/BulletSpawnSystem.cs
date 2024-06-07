@@ -1,19 +1,24 @@
+using System;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed partial class BulletSpawnSystem : MonoBehaviour
+    public sealed partial class BulletSpawnSystem : MonoBehaviour, IGameFixedUpdateListener
     {
         [SerializeField] private LevelBounds levelBounds;
-
         [SerializeField] private BulletPool bulletPool;
 
         private readonly HashSet<Bullet> _activeBullets = new();
         private readonly List<Bullet> _cache = new();
 
+        private void Awake()
+        {
+            IGameListener.Register(this);
+        }
 
-        private void FixedUpdate()
+        public void OnFixedUpdateGame(float deltaTime)
         {
             _cache.Clear();
             _cache.AddRange(_activeBullets);

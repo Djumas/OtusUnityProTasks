@@ -1,16 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace ShootEmUp
 {
     public sealed class EnemySpawnController : MonoBehaviour
     {
         [SerializeField] private EnemyPool enemyPool;
-
         [SerializeField] private GameObject target;
-
         [SerializeField] private BulletSpawnSystem bulletSpawnSystem;
 
         private readonly HashSet<GameObject> _activeEnemies = new();

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace ShootEmUp
 {
@@ -8,11 +7,10 @@ namespace ShootEmUp
         [SerializeField] BulletSpawnSystem bulletSpawnSystem;
         [SerializeField] BulletConfig bulletConfig;
         [SerializeField] private Transform firePoint;
-
-
-        public void Init(BulletSpawnSystem bulletSpawnSystem)
+        
+        public void Init(BulletSpawnSystem otherBulletSpawnSystem)
         {
-            this.bulletSpawnSystem = bulletSpawnSystem;
+            bulletSpawnSystem = otherBulletSpawnSystem;
         }
 
         public void Fire(Vector3 targetPosition, bool isPlayer)

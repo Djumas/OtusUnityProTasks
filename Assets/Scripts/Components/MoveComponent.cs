@@ -1,9 +1,8 @@
 using UnityEngine;
-using Vector3 = System.Numerics.Vector3;
 
 namespace ShootEmUp
 {
-    public sealed class MoveComponent : MonoBehaviour
+    public sealed class MoveComponent : MonoBehaviour, IGameFixedUpdateListener
     {
         [SerializeField]
         private new Rigidbody2D rigidbody2D;
@@ -12,7 +11,12 @@ namespace ShootEmUp
         private float speed = 5.0f;
 
         private float horizontalDirection;
-
+        
+        private void Awake()
+        {
+            IGameListener.Register(this);
+        }
+        
         public void Move(float horizontalDirection)
         {
             this.horizontalDirection = horizontalDirection;
@@ -29,9 +33,9 @@ namespace ShootEmUp
             rigidbody2D.MovePosition(nextPosition);
         }
 
-        private void FixedUpdate()
+        public void OnFixedUpdateGame(float fixedDeltaTime)
         {
-            MoveByRigidbodyVelocity(new Vector2(horizontalDirection, 0) * Time.fixedDeltaTime);
+            MoveByRigidbodyVelocity(new Vector2(horizontalDirection, 0) * fixedDeltaTime);
         }
     }
 }
