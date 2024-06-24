@@ -5,14 +5,12 @@ namespace ShootEmUp
 {
     public sealed class EnemyPool : MonoBehaviour
     {
-        [Header("Spawn")] 
-        [SerializeField] private EnemyPositions enemyPositions;
+        [Header("Spawn")] [SerializeField] private EnemyPositions enemyPositions;
         [SerializeField] private int maxEnemiesCount = 7;
         [SerializeField] private Transform worldTransform;
         [SerializeField] private BulletSpawnSystem bulletSpawnSystem;
 
-        [Header("Pool")] 
-        [SerializeField] private Transform container;
+        [Header("Pool")] [SerializeField] private Transform container;
         [SerializeField] private GameObject enemyPrefab;
 
         private readonly Queue<GameObject> _enemyPool = new();
@@ -31,8 +29,8 @@ namespace ShootEmUp
             if (!_enemyPool.TryDequeue(out enemy))
             {
                 return false;
-                
             }
+
             enemy.transform.SetParent(worldTransform);
 
             var spawnPosition = enemyPositions.RandomSpawnPosition();
@@ -45,7 +43,7 @@ namespace ShootEmUp
             enemy.GetComponent<WeaponComponent>().Init(bulletSpawnSystem);
             enemy.GetComponent<HitPointsComponent>().Init();
             return true;
-            }
+        }
 
         public void Release(GameObject enemy)
         {

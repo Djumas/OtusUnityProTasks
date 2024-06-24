@@ -1,9 +1,8 @@
-using System;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-    public class CharacterHpObserver : MonoBehaviour, IGameStartListener,IGameFinishListener
+    public class CharacterHpObserver : MonoBehaviour, IGameStartListener, IGameFinishListener
     {
         [SerializeField] private GameManager gameManager;
         [SerializeField] private HitPointsComponent hitPointsComponent;

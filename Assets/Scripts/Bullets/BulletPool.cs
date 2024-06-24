@@ -9,9 +9,9 @@ namespace ShootEmUp
         [SerializeField] private Transform container;
         [SerializeField] private Bullet prefab;
         [SerializeField] private Transform worldTransform;
-        
+
         private readonly Queue<Bullet> _bulletPool = new();
-        
+
         private void Awake()
         {
             for (var i = 0; i < initialCount; i++)
@@ -31,7 +31,7 @@ namespace ShootEmUp
             {
                 bullet = Instantiate(prefab, worldTransform);
             }
-            
+
             return bullet;
         }
 

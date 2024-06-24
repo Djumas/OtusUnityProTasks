@@ -11,7 +11,7 @@ namespace ShootEmUp
         {
             IGameListener.Register(this);
         }
-        
+
         public void OnUpdateGame(float deltaTime)
         {
             moveComponent.Move(inputSystem.HorizontalDirection);

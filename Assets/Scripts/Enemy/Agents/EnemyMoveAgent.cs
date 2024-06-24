@@ -9,12 +9,12 @@ namespace ShootEmUp
         public bool IsReached { get; private set; }
 
         private Vector2 _destination;
-        
+
         private void Awake()
         {
             IGameListener.Register(this);
         }
-        
+
         public void SetDestination(Vector2 endPoint)
         {
             _destination = endPoint;
@@ -27,9 +27,9 @@ namespace ShootEmUp
             {
                 return;
             }
-            
-            var vector = _destination - (Vector2) transform.position;
-            if (vector.sqrMagnitude <= moveTreshhold*moveTreshhold)
+
+            var vector = _destination - (Vector2)transform.position;
+            if (vector.sqrMagnitude <= moveTreshhold * moveTreshhold)
             {
                 IsReached = true;
                 return;

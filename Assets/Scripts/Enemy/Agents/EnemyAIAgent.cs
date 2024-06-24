@@ -33,6 +33,5 @@ namespace ShootEmUp
                 attackAgent.SetActive(true);
             }
         }
-
     }
 }

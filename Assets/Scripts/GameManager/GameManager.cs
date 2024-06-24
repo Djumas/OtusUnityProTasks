@@ -1,11 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
-using UnityEngine.SceneManagement;
 
 namespace ShootEmUp
 {
@@ -20,22 +15,22 @@ namespace ShootEmUp
     public sealed class GameManager : MonoBehaviour
     {
         [SerializeField] private int startDelay = 3;
-        
+
         private static List<IGameListener> _gameListeners = new();
         private static List<IGameUpdateListener> _gameUpdateListeners = new();
         private static List<IGameFixedUpdateListener> _gameFixedUpdateListeners = new();
 
         private GameState _gameState = GameState.Off;
-        
+
         public static void Register(IGameListener gameListener)
         {
             _gameListeners.Add(gameListener);
-            
+
             if (gameListener is IGameUpdateListener gameUpdateListener)
             {
                 _gameUpdateListeners.Add(gameUpdateListener);
             }
-            
+
             if (gameListener is IGameFixedUpdateListener gameFixedUpdateListener)
             {
                 _gameFixedUpdateListeners.Add(gameFixedUpdateListener);
@@ -61,7 +56,7 @@ namespace ShootEmUp
 
             _gameState = GameState.Finish;
         }
-        
+
         public void StartGame()
         {
             if (_gameState != GameState.Off)
@@ -69,6 +64,7 @@ namespace ShootEmUp
                 Debug.Log("Game is not off");
                 return;
             }
+
             StartCoroutine(WaitAndStart());
         }
 
@@ -87,6 +83,7 @@ namespace ShootEmUp
                     gameFinishListener.OnStartGame();
                 }
             }
+
             _gameState = GameState.Playing;
             Debug.Log("Game started!");
         }
@@ -94,7 +91,6 @@ namespace ShootEmUp
 
         public void PauseGame()
         {
-
             if (_gameState != GameState.Playing)
             {
                 Debug.Log("Game is not playing!");
@@ -110,12 +106,12 @@ namespace ShootEmUp
                     gameFinishListener.OnPauseGame();
                 }
             }
+
             _gameState = GameState.Pause;
         }
-        
+
         public void ResumeGame()
         {
-            
             if (_gameState != GameState.Pause)
             {
                 Debug.Log("Game not paused!");
@@ -131,6 +127,7 @@ namespace ShootEmUp
                     gameFinishListener.OnResumeGame();
                 }
             }
+
             _gameState = GameState.Playing;
         }
 
@@ -144,7 +141,7 @@ namespace ShootEmUp
                 }
             }
         }
-        
+
         private void FixedUpdate()
         {
             if (_gameState == GameState.Playing)
@@ -153,62 +150,6 @@ namespace ShootEmUp
                 {
                     gameFixedUpdateListener.OnFixedUpdateGame(Time.fixedDeltaTime);
                 }
-            }
-        }
-
-#if UNITY_EDITOR
-        void OnGUI()
-        {
-            if (GUILayout.Button("Start Game"))
-            {
-                StartGame();
-            }
-            
-            if (GUILayout.Button("Finish Game"))
-            {
-                FinishGame();
-            }
-            
-            if (GUILayout.Button("Pause Game"))
-            {
-                PauseGame();
-            }
-            
-            if (GUILayout.Button("Resume Game"))
-            {
-                ResumeGame();
-            }
-        }
-#endif
-    }
-    
-[CustomEditor(typeof(GameManager))]
-    public class GameManagerEditor:Editor
-    {
-        public override void OnInspectorGUI()
-        {
-            DrawDefaultInspector();
-
-            var targ = (GameManager)target;
-            
-            if (GUILayout.Button("Start game"))
-            {
-                targ.StartGame();
-            }
-            
-            if (GUILayout.Button("Pause game"))
-            {
-                targ.PauseGame();
-            }
-            
-            if (GUILayout.Button("Resume game"))
-            {
-                targ.ResumeGame();
-            }
-            
-            if (GUILayout.Button("Finish game"))
-            {
-                targ.FinishGame();
             }
         }
     }

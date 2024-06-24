@@ -6,21 +6,21 @@ namespace ShootEmUp
     public sealed class Bullet : MonoBehaviour, IGamePauseListener, IGameFinishListener, IGameResumeListener
     {
         public event Action<Bullet, Collision2D> OnCollisionEntered;
-        
+
         public bool IsPlayer { get; set; }
         public int Damage { get; set; }
 
         [SerializeField] private Vector3 _storedVelocity;
-        
+
         [SerializeField] private new Rigidbody2D rigidbody2D;
 
         [SerializeField] private SpriteRenderer spriteRenderer;
-        
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
             Debug.Log("BulletCollided");
             OnCollisionEntered?.Invoke(this, collision);
-            
+
             if (!collision.gameObject.TryGetComponent(out TeamComponent team))
             {
                 return;
@@ -39,7 +39,7 @@ namespace ShootEmUp
 
         private void Awake()
         {
-         IGameListener.Register(this);   
+            IGameListener.Register(this);
         }
 
         public void OnPauseGame()
@@ -47,17 +47,17 @@ namespace ShootEmUp
             _storedVelocity = rigidbody2D.velocity;
             rigidbody2D.velocity = Vector2.zero;
         }
-        
+
         public void OnResumeGame()
         {
             rigidbody2D.velocity = _storedVelocity;
         }
-        
+
         public void OnFinishGame()
         {
             rigidbody2D.velocity = Vector2.zero;
         }
-        
+
         public void SetVelocity(Vector2 velocity)
         {
             rigidbody2D.velocity = velocity;

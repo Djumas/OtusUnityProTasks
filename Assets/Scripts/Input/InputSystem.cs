@@ -8,7 +8,7 @@ namespace ShootEmUp
         public float HorizontalDirection { get; private set; }
 
         public event Action OnFire;
-        
+
         private void Awake()
         {
             IGameListener.Register(this);

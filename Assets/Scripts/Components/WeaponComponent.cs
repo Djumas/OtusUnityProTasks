@@ -7,7 +7,7 @@ namespace ShootEmUp
         [SerializeField] BulletSpawnSystem bulletSpawnSystem;
         [SerializeField] BulletConfig bulletConfig;
         [SerializeField] private Transform firePoint;
-        
+
         public void Init(BulletSpawnSystem otherBulletSpawnSystem)
         {
             bulletSpawnSystem = otherBulletSpawnSystem;

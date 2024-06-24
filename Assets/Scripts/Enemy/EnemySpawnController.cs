@@ -20,7 +20,7 @@ namespace ShootEmUp
             {
                 enemy.GetComponent<HitPointsComponent>().OnHpEmpty += OnEnemyDestroyed;
             }
-            
+
             return true;
         }
 

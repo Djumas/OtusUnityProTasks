@@ -2,7 +2,8 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public class CharacterWeaponController : MonoBehaviour, IGamePauseListener,IGameResumeListener, IGameStartListener, IGameFinishListener
+    public class CharacterWeaponController : MonoBehaviour, IGamePauseListener, IGameResumeListener, IGameStartListener,
+        IGameFinishListener
     {
         [SerializeField] private WeaponComponent weaponComponent;
         [SerializeField] private InputSystem inputSystem;
@@ -11,7 +12,7 @@ namespace ShootEmUp
         {
             IGameListener.Register(this);
         }
-        
+
         public void OnPauseGame()
         {
             inputSystem.OnFire -= Fire;
@@ -31,7 +32,7 @@ namespace ShootEmUp
         {
             inputSystem.OnFire -= Fire;
         }
-        
+
         private void Fire()
         {
             weaponComponent.Fire();

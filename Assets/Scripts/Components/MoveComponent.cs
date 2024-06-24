@@ -4,19 +4,17 @@ namespace ShootEmUp
 {
     public sealed class MoveComponent : MonoBehaviour, IGameFixedUpdateListener
     {
-        [SerializeField]
-        private new Rigidbody2D rigidbody2D;
+        [SerializeField] private new Rigidbody2D rigidbody2D;
 
-        [SerializeField]
-        private float speed = 5.0f;
+        [SerializeField] private float speed = 5.0f;
 
         private float horizontalDirection;
-        
+
         private void Awake()
         {
             IGameListener.Register(this);
         }
-        
+
         public void Move(float horizontalDirection)
         {
             this.horizontalDirection = horizontalDirection;

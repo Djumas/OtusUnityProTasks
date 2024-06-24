@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace ShootEmUp
 {
     public interface IGameListener
@@ -9,33 +7,33 @@ namespace ShootEmUp
             GameManager.Register(gameListener);
         }
     }
-    
-    public interface IGameFinishListener:IGameListener
+
+    public interface IGameFinishListener : IGameListener
     {
         void OnFinishGame();
     }
-    
-    public interface IGamePauseListener:IGameListener
+
+    public interface IGamePauseListener : IGameListener
     {
         void OnPauseGame();
     }
-    
-    public interface IGameResumeListener:IGameListener
+
+    public interface IGameResumeListener : IGameListener
     {
         void OnResumeGame();
     }
-    
-    public interface IGameStartListener:IGameListener
+
+    public interface IGameStartListener : IGameListener
     {
         void OnStartGame();
     }
-    
-    public interface IGameUpdateListener:IGameListener
+
+    public interface IGameUpdateListener : IGameListener
     {
         void OnUpdateGame(float deltaTime);
     }
-    
-    public interface IGameFixedUpdateListener:IGameListener
+
+    public interface IGameFixedUpdateListener : IGameListener
     {
         void OnFixedUpdateGame(float fixedDeltaTime);
     }

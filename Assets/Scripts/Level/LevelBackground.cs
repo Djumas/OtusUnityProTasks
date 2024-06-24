@@ -30,7 +30,7 @@ namespace ShootEmUp
             var position = _myTransform.position;
             _positionX = position.x;
             _positionZ = position.z;
-            
+
             IGameListener.Register(this);
         }
 
