@@ -1,11 +1,18 @@
 using UnityEngine;
+using VContainer;
 
 namespace ShootEmUp
 {
     public class CharacterMoveController : MonoBehaviour, IGameUpdateListener
     {
         [SerializeField] private MoveComponent moveComponent;
-        [SerializeField] private InputSystem inputSystem;
+        private InputSystem _inputSystem;
+
+        [Inject]
+        public void Construct(InputSystem inputSystem)
+        {
+            _inputSystem = inputSystem;
+        }
 
         private void Awake()
         {
@@ -14,7 +21,7 @@ namespace ShootEmUp
 
         public void OnUpdateGame(float deltaTime)
         {
-            moveComponent.Move(inputSystem.HorizontalDirection);
+            moveComponent.Move(_inputSystem.HorizontalDirection);
         }
     }
 }

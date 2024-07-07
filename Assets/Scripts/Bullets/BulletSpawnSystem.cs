@@ -1,18 +1,22 @@
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
 
 namespace ShootEmUp
 {
-    public sealed partial class BulletSpawnSystem : MonoBehaviour, IGameFixedUpdateListener
+    public sealed class BulletSpawnSystem : IGameFixedUpdateListener
     {
-        [SerializeField] private LevelBounds levelBounds;
-        [SerializeField] private BulletPool bulletPool;
+        private LevelBounds _levelBounds;
+        private BulletPool _bulletPool;
 
         private readonly HashSet<Bullet> _activeBullets = new();
         private readonly List<Bullet> _cache = new();
 
-        private void Awake()
+        [Inject]
+        private void Construct(BulletPool bulletPool, LevelBounds levelBounds)
         {
+            _levelBounds = levelBounds;
+            _bulletPool = bulletPool;
             IGameListener.Register(this);
         }
 
@@ -24,7 +28,7 @@ namespace ShootEmUp
             for (int i = 0, count = _cache.Count; i < count; i++)
             {
                 var bullet = _cache[i];
-                if (!levelBounds.InBounds(bullet.transform.position))
+                if (!_levelBounds.InBounds(bullet.transform.position))
                 {
                     RemoveBullet(bullet);
                 }
@@ -33,7 +37,7 @@ namespace ShootEmUp
 
         public void FlyBulletByArgs(BulletSpawnArgs args)
         {
-            var bullet = bulletPool.Get();
+            var bullet = _bulletPool.Get();
 
             bullet.SetPosition(args.position);
             bullet.SetColor(args.color);
@@ -58,7 +62,7 @@ namespace ShootEmUp
             if (_activeBullets.Remove(bullet))
             {
                 bullet.OnCollisionEntered -= OnBulletCollision;
-                bulletPool.Release(bullet);
+                _bulletPool.Release(bullet);
             }
         }
     }

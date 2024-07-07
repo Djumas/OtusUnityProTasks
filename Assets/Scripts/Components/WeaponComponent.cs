@@ -1,16 +1,18 @@
 using UnityEngine;
+using VContainer;
 
 namespace ShootEmUp
 {
     public sealed class WeaponComponent : MonoBehaviour
     {
-        [SerializeField] BulletSpawnSystem bulletSpawnSystem;
+        private BulletSpawnSystem _bulletSpawnSystem;
         [SerializeField] BulletConfig bulletConfig;
         [SerializeField] private Transform firePoint;
 
+        [Inject]
         public void Init(BulletSpawnSystem otherBulletSpawnSystem)
         {
-            bulletSpawnSystem = otherBulletSpawnSystem;
+            _bulletSpawnSystem = otherBulletSpawnSystem;
         }
 
         public void Fire(Vector3 targetPosition, bool isPlayer)
@@ -18,7 +20,7 @@ namespace ShootEmUp
             var startPosition = (Vector2)firePoint.position;
             var vector = (Vector2)targetPosition - startPosition;
             var direction = vector.normalized;
-            bulletSpawnSystem.FlyBulletByArgs(new BulletSpawnArgs
+            _bulletSpawnSystem.FlyBulletByArgs(new BulletSpawnArgs
             {
                 isPlayer = isPlayer,
                 physicsLayer = (int)bulletConfig.physicsLayer,

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
 
 namespace ShootEmUp
 {
@@ -8,12 +9,18 @@ namespace ShootEmUp
         [Header("Spawn")] [SerializeField] private EnemyPositions enemyPositions;
         [SerializeField] private int maxEnemiesCount = 7;
         [SerializeField] private Transform worldTransform;
-        [SerializeField] private BulletSpawnSystem bulletSpawnSystem;
+        private BulletSpawnSystem _bulletSpawnSystem;
 
         [Header("Pool")] [SerializeField] private Transform container;
         [SerializeField] private GameObject enemyPrefab;
 
         private readonly Queue<GameObject> _enemyPool = new();
+
+        [Inject]
+        public void Construct(BulletSpawnSystem bulletSpawnSystem)
+        {
+            _bulletSpawnSystem = bulletSpawnSystem;
+        }
 
         private void Awake()
         {
@@ -40,7 +47,7 @@ namespace ShootEmUp
             enemy.GetComponent<EnemyMoveAgent>().SetDestination(attackPosition.position);
 
             enemy.GetComponent<EnemyAttackAgent>().SetTarget(target);
-            enemy.GetComponent<WeaponComponent>().Init(bulletSpawnSystem);
+            enemy.GetComponent<WeaponComponent>().Init(_bulletSpawnSystem);
             enemy.GetComponent<HitPointsComponent>().Init();
             return true;
         }

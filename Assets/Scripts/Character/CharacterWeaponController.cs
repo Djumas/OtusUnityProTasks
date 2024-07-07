@@ -1,4 +1,5 @@
 using UnityEngine;
+using VContainer;
 
 namespace ShootEmUp
 {
@@ -6,8 +7,16 @@ namespace ShootEmUp
         IGameFinishListener
     {
         [SerializeField] private WeaponComponent weaponComponent;
-        [SerializeField] private InputSystem inputSystem;
+        private InputSystem _inputSystem;
 
+        
+        [Inject]
+        public void Construct(InputSystem inputSystem)
+        {
+            _inputSystem = inputSystem;
+        }
+        
+        
         private void Awake()
         {
             IGameListener.Register(this);
@@ -15,22 +24,22 @@ namespace ShootEmUp
 
         public void OnPauseGame()
         {
-            inputSystem.OnFire -= Fire;
+            _inputSystem.OnFire -= Fire;
         }
 
         public void OnResumeGame()
         {
-            inputSystem.OnFire += Fire;
+            _inputSystem.OnFire += Fire;
         }
 
         public void OnStartGame()
         {
-            inputSystem.OnFire += Fire;
+            _inputSystem.OnFire += Fire;
         }
 
         public void OnFinishGame()
         {
-            inputSystem.OnFire -= Fire;
+            _inputSystem.OnFire -= Fire;
         }
 
         private void Fire()

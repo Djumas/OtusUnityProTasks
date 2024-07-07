@@ -1,15 +1,17 @@
 using System;
 using UnityEngine;
+using VContainer;
 
 namespace ShootEmUp
 {
-    public sealed class InputSystem : MonoBehaviour, IGameUpdateListener
+    public sealed class InputSystem : IGameUpdateListener
     {
         public float HorizontalDirection { get; private set; }
 
         public event Action OnFire;
 
-        private void Awake()
+        [Inject]
+        public void Construct()
         {
             IGameListener.Register(this);
         }

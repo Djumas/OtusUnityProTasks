@@ -1,13 +1,20 @@
 using UnityEngine;
+using VContainer;
 
 namespace ShootEmUp
 {
     public class EnemyCoolDownSpawner : MonoBehaviour, IGameUpdateListener
     {
-        [SerializeField] private EnemySpawnController enemySpawnController;
+        private EnemySpawnController _enemySpawnController;
         [SerializeField] private float spawnCoolDown = 1f;
         private float _elapsedTime = 0;
 
+        [Inject]
+        public void Construct(EnemySpawnController enemySpawnController)
+        {
+            _enemySpawnController = enemySpawnController;
+        }
+        
         private void Awake()
         {
             IGameListener.Register(this);
@@ -21,7 +28,7 @@ namespace ShootEmUp
                 if (_elapsedTime >= spawnCoolDown)
                 {
                     Debug.Log("Trying to spawn");
-                    enemySpawnController.TrySpawnEnemy(out GameObject _);
+                    _enemySpawnController.TrySpawnEnemy(out GameObject _);
                     _elapsedTime = 0;
                 }
             }

@@ -1,11 +1,19 @@
 using UnityEngine;
+using VContainer;
+using VContainer.Unity;
 
 namespace ShootEmUp
 {
     public class CharacterHpObserver : MonoBehaviour, IGameStartListener, IGameFinishListener
     {
-        [SerializeField] private GameManager gameManager;
+        private GameManager _gameManager;
         [SerializeField] private HitPointsComponent hitPointsComponent;
+
+        [Inject]
+        public void Construct(GameManager gameManager)
+        {
+            _gameManager = gameManager;
+        }
 
         private void Awake()
         {
@@ -23,6 +31,6 @@ namespace ShootEmUp
             hitPointsComponent.OnHpEmpty -= OnCharacterDeath;
         }
 
-        private void OnCharacterDeath(GameObject _) => gameManager.FinishGame();
+        private void OnCharacterDeath(GameObject _) => _gameManager.FinishGame();
     }
 }

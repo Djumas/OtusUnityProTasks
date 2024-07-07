@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer.Unity;
 
 namespace ShootEmUp
 {
@@ -12,7 +13,7 @@ namespace ShootEmUp
         Off
     }
 
-    public sealed class GameManager : MonoBehaviour
+    public sealed class GameManager : MonoBehaviour, ITickable, IFixedTickable
     {
         [SerializeField] private int startDelay = 3;
 
@@ -131,7 +132,7 @@ namespace ShootEmUp
             _gameState = GameState.Playing;
         }
 
-        private void Update()
+        public void Tick()
         {
             if (_gameState == GameState.Playing)
             {
@@ -142,7 +143,7 @@ namespace ShootEmUp
             }
         }
 
-        private void FixedUpdate()
+        public void FixedTick()
         {
             if (_gameState == GameState.Playing)
             {
