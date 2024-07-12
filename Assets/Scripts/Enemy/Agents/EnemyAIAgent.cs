@@ -11,7 +11,6 @@ namespace ShootEmUp
         private void Awake()
         {
             attackAgent.SetActive(false);
-            IGameListener.Register(this);
         }
 
         public void OnFixedUpdateGame(float deltaTime)

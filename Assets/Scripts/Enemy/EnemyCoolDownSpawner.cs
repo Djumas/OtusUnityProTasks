@@ -10,16 +10,12 @@ namespace ShootEmUp
         private float _elapsedTime = 0;
 
         [Inject]
-        public void Construct(EnemySpawnController enemySpawnController)
+        public void Construct(EnemySpawnController enemySpawnController, GameManager gameManager)
         {
             _enemySpawnController = enemySpawnController;
+            gameManager.Register(this);
         }
         
-        private void Awake()
-        {
-            IGameListener.Register(this);
-        }
-
         public void OnUpdateGame(float deltaTime)
         {
             {

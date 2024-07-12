@@ -13,11 +13,12 @@ namespace ShootEmUp
         private readonly List<Bullet> _cache = new();
 
         [Inject]
-        private void Construct(BulletPool bulletPool, LevelBounds levelBounds)
+        private void Construct(BulletPool bulletPool, LevelBounds levelBounds, GameManager gameManager)
         {
             _levelBounds = levelBounds;
             _bulletPool = bulletPool;
-            IGameListener.Register(this);
+            gameManager.Register(this);
+            //IGameListener.Register(this);
         }
 
         public void OnFixedUpdateGame(float deltaTime)

@@ -37,10 +37,10 @@ namespace ShootEmUp
             }
         }
 
-        private void Awake()
+        /*private void Awake()
         {
             IGameListener.Register(this);
-        }
+        }*/
 
         public void OnPauseGame()
         {
@@ -76,6 +76,11 @@ namespace ShootEmUp
         public void SetColor(Color color)
         {
             spriteRenderer.color = color;
+        }
+
+        public void Reset()
+        {
+            rigidbody2D.velocity = Vector2.zero;
         }
     }
 }

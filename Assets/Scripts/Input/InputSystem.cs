@@ -11,9 +11,9 @@ namespace ShootEmUp
         public event Action OnFire;
 
         [Inject]
-        public void Construct()
+        public void Construct(GameManager gameManager)
         {
-            IGameListener.Register(this);
+            gameManager.Register(this);
         }
 
         public void OnUpdateGame(float deltaTime)

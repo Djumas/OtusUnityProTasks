@@ -13,11 +13,7 @@ namespace ShootEmUp
         public void Construct(GameManager gameManager)
         {
             _gameManager = gameManager;
-        }
-
-        private void Awake()
-        {
-            IGameListener.Register(this);
+            _gameManager.Register(this);
         }
 
         public void OnStartGame()

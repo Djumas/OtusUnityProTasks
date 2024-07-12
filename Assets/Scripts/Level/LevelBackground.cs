@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Serialization;
+using VContainer;
 
 namespace ShootEmUp
 {
@@ -18,11 +19,13 @@ namespace ShootEmUp
 
         private Transform _myTransform;
 
-        [FormerlySerializedAs("m_params")] [SerializeField]
+        [SerializeField]
         private Params mParams;
 
-        private void Awake()
+        [Inject]
+        public void Construct(GameManager gameManager)
         {
+            gameManager.Register(this);
             _startPositionY = mParams.mStartPositionY;
             _endPositionY = mParams.mEndPositionY;
             _movingSpeedY = mParams.mMovingSpeedY;
@@ -31,7 +34,6 @@ namespace ShootEmUp
             _positionX = position.x;
             _positionZ = position.z;
 
-            IGameListener.Register(this);
         }
 
         public void OnFixedUpdateGame(float fixedDeltaTime)

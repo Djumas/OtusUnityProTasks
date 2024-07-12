@@ -11,11 +11,6 @@ namespace ShootEmUp
         private float _currentTime;
         public bool IsActive { get; private set; }
 
-        private void Awake()
-        {
-            IGameListener.Register(this);
-        }
-
         public void SetActive(bool state)
         {
             IsActive = state;

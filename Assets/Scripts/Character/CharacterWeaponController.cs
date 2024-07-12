@@ -9,17 +9,11 @@ namespace ShootEmUp
         [SerializeField] private WeaponComponent weaponComponent;
         private InputSystem _inputSystem;
 
-        
         [Inject]
-        public void Construct(InputSystem inputSystem)
+        public void Construct(InputSystem inputSystem, GameManager gameManager)
         {
             _inputSystem = inputSystem;
-        }
-        
-        
-        private void Awake()
-        {
-            IGameListener.Register(this);
+            gameManager.Register(this);
         }
 
         public void OnPauseGame()

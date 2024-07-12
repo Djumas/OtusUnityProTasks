@@ -8,10 +8,12 @@ namespace ShootEmUp
     {
         private EnemyPool _enemyPool;
         [SerializeField] private GameObject target;
+        private GameManager _gameManager;
 
         [Inject]
-        public void Construct(EnemyPool enemyPool)
+        public void Construct(EnemyPool enemyPool, GameManager gameManager)
         {
+            _gameManager = gameManager;
             _enemyPool = enemyPool;
         }
 
@@ -25,6 +27,9 @@ namespace ShootEmUp
             if (_activeEnemies.Add(enemy))
             {
                 enemy.GetComponent<HitPointsComponent>().OnHpEmpty += OnEnemyDestroyed;
+                _gameManager.Register(enemy.GetComponent<EnemyAttackAgent>());
+                _gameManager.Register(enemy.GetComponent<EnemyAIAgent>());
+                _gameManager.Register(enemy.GetComponent<EnemyMoveAgent>());
             }
 
             return true;

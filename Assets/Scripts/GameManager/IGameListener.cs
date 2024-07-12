@@ -2,10 +2,10 @@ namespace ShootEmUp
 {
     public interface IGameListener
     {
-        public static void Register(IGameListener gameListener)
+       /* public static void Register(IGameListener gameListener)
         {
             GameManager.Register(gameListener);
-        }
+        }*/
     }
 
     public interface IGameFinishListener : IGameListener

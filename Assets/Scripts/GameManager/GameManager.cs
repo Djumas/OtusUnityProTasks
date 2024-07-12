@@ -17,13 +17,13 @@ namespace ShootEmUp
     {
         [SerializeField] private int startDelay = 3;
 
-        private static List<IGameListener> _gameListeners = new();
-        private static List<IGameUpdateListener> _gameUpdateListeners = new();
-        private static List<IGameFixedUpdateListener> _gameFixedUpdateListeners = new();
+        private List<IGameListener> _gameListeners = new();
+        private List<IGameUpdateListener> _gameUpdateListeners = new();
+        private List<IGameFixedUpdateListener> _gameFixedUpdateListeners = new();
 
         private GameState _gameState = GameState.Off;
 
-        public static void Register(IGameListener gameListener)
+        public void Register(IGameListener gameListener)
         {
             _gameListeners.Add(gameListener);
 

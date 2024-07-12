@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
 
 namespace ShootEmUp
 {
@@ -11,12 +12,18 @@ namespace ShootEmUp
         [SerializeField] private Transform worldTransform;
 
         private readonly Queue<Bullet> _bulletPool = new();
+        private GameManager _gameManager;
 
-        private void Awake()
+
+        [Inject]
+        public void Construct(GameManager gameManager)
         {
+            _gameManager = gameManager;
+            
             for (var i = 0; i < initialCount; i++)
             {
                 var bullet = Instantiate(prefab, container);
+                _gameManager.Register(bullet);
                 _bulletPool.Enqueue(bullet);
             }
         }
@@ -30,14 +37,15 @@ namespace ShootEmUp
             else
             {
                 bullet = Instantiate(prefab, worldTransform);
+                _gameManager.Register(bullet);
             }
-
             return bullet;
         }
 
         public void Release(Bullet otherBullet)
         {
             otherBullet.transform.SetParent(container);
+            otherBullet.Reset();
             _bulletPool.Enqueue(otherBullet);
         }
     }

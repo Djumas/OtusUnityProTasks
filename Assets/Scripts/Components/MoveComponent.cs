@@ -1,4 +1,5 @@
 using UnityEngine;
+using VContainer;
 
 namespace ShootEmUp
 {
@@ -10,9 +11,10 @@ namespace ShootEmUp
 
         private float horizontalDirection;
 
-        private void Awake()
+        [Inject]
+        public void Construct(GameManager gameManager)
         {
-            IGameListener.Register(this);
+            gameManager.Register(this);
         }
 
         public void Move(float horizontalDirection)

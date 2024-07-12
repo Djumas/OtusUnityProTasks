@@ -10,11 +10,6 @@ namespace ShootEmUp
 
         private Vector2 _destination;
 
-        private void Awake()
-        {
-            IGameListener.Register(this);
-        }
-
         public void SetDestination(Vector2 endPoint)
         {
             _destination = endPoint;
