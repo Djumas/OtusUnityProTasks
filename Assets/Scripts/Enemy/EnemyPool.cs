@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using VContainer;
 
@@ -9,7 +10,7 @@ namespace ShootEmUp
         [Header("Spawn")] [SerializeField] private EnemyPositions enemyPositions;
         [SerializeField] private int maxEnemiesCount = 7;
         [SerializeField] private Transform worldTransform;
-        private BulletSpawnSystem _bulletSpawnSystem;
+        [ShowInInspector, ReadOnly] private BulletSpawnSystem _bulletSpawnSystem;
 
         [Header("Pool")] [SerializeField] private Transform container;
         [SerializeField] private GameObject enemyPrefab;

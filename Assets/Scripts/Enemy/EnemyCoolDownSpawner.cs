@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using VContainer;
 
@@ -5,15 +6,15 @@ namespace ShootEmUp
 {
     public class EnemyCoolDownSpawner : MonoBehaviour, IGameUpdateListener
     {
-        private EnemySpawnController _enemySpawnController;
+        [ShowInInspector, ReadOnly] private EnemySpawnController _enemySpawnController;
         [SerializeField] private float spawnCoolDown = 1f;
         private float _elapsedTime = 0;
 
         [Inject]
-        public void Construct(EnemySpawnController enemySpawnController, GameManager gameManager)
+        public void Construct(EnemySpawnController enemySpawnController)
         {
+            Debug.Log($"{name} Construct");
             _enemySpawnController = enemySpawnController;
-            gameManager.Register(this);
         }
         
         public void OnUpdateGame(float deltaTime)

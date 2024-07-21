@@ -37,11 +37,6 @@ namespace ShootEmUp
             }
         }
 
-        /*private void Awake()
-        {
-            IGameListener.Register(this);
-        }*/
-
         public void OnPauseGame()
         {
             _storedVelocity = rigidbody2D.velocity;

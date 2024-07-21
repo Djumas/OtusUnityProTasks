@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using VContainer;
 
@@ -12,12 +13,13 @@ namespace ShootEmUp
         [SerializeField] private Transform worldTransform;
 
         private readonly Queue<Bullet> _bulletPool = new();
-        private GameManager _gameManager;
+        [ShowInInspector, ReadOnly] private GameManager _gameManager;
 
 
         [Inject]
         public void Construct(GameManager gameManager)
         {
+            Debug.Log($"{name} Construct");
             _gameManager = gameManager;
             
             for (var i = 0; i < initialCount; i++)

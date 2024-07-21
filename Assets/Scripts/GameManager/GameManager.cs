@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
+using VContainer;
 using VContainer.Unity;
 
 namespace ShootEmUp
@@ -15,16 +18,52 @@ namespace ShootEmUp
 
     public sealed class GameManager : MonoBehaviour, ITickable, IFixedTickable
     {
-        [SerializeField] private int startDelay = 3;
+        public GameState GameState { get; private set; } = GameState.Off;
 
-        private List<IGameListener> _gameListeners = new();
-        private List<IGameUpdateListener> _gameUpdateListeners = new();
-        private List<IGameFixedUpdateListener> _gameFixedUpdateListeners = new();
+        [ShowInInspector, ReadOnly] private IEnumerable<IGameListener> _gameListenersEnumerable;
 
-        private GameState _gameState = GameState.Off;
+        [ShowInInspector, ReadOnly] private List<IGameListener> _gameListeners = new();
+        [ShowInInspector, ReadOnly] private List<IGameUpdateListener> _gameUpdateListeners = new();
+        [ShowInInspector, ReadOnly] private List<IGameFixedUpdateListener> _gameFixedUpdateListeners = new();
+
+        private IObjectResolver _resolver;
+
+        [Inject]
+        public void Construct(IObjectResolver resolver)
+        {
+            _resolver = resolver;
+        }
+
+        private void Awake()
+        {
+            Debug.Log($"{name} is trying to Inject");
+
+            _gameListenersEnumerable = _resolver.Resolve<IEnumerable<IGameListener>>();
+
+            foreach (var gameListenerEnumerable in _gameListenersEnumerable)
+            {
+                _gameListeners.Add(gameListenerEnumerable);
+            }
+
+            Debug.Log($"GameListeners Count: {_gameListeners.Count}");
+
+            foreach (var gameListener in _gameListeners)
+            {
+                if (gameListener is IGameUpdateListener gameUpdateListener)
+                {
+                    _gameUpdateListeners.Add(gameUpdateListener);
+                }
+
+                if (gameListener is IGameFixedUpdateListener gameFixedUpdateListener)
+                {
+                    _gameFixedUpdateListeners.Add(gameFixedUpdateListener);
+                }
+            }
+        }
 
         public void Register(IGameListener gameListener)
         {
+            Debug.Log($"GameManager.register is called by {gameListener}");
             _gameListeners.Add(gameListener);
 
             if (gameListener is IGameUpdateListener gameUpdateListener)
@@ -40,41 +79,16 @@ namespace ShootEmUp
 
         private void OnDestroy()
         {
-            _gameState = GameState.Off;
+            GameState = GameState.Off;
         }
 
-        public void FinishGame()
-        {
-            Debug.Log("Game over!");
-
-            foreach (var gameListener in _gameListeners)
-            {
-                if (gameListener is IGameFinishListener gameFinishListener)
-                {
-                    gameFinishListener.OnFinishGame();
-                }
-            }
-
-            _gameState = GameState.Finish;
-        }
-
+        [Button]
         public void StartGame()
         {
-            if (_gameState != GameState.Off)
+            if (GameState != GameState.Off)
             {
                 Debug.Log("Game is not off");
                 return;
-            }
-
-            StartCoroutine(WaitAndStart());
-        }
-
-        private IEnumerator WaitAndStart()
-        {
-            for (int i = 0; i < startDelay; i++)
-            {
-                Debug.Log($"Game starting in...{startDelay - i}");
-                yield return new WaitForSeconds(1);
             }
 
             foreach (var gameListener in _gameListeners)
@@ -85,14 +99,14 @@ namespace ShootEmUp
                 }
             }
 
-            _gameState = GameState.Playing;
+            GameState = GameState.Playing;
             Debug.Log("Game started!");
         }
 
-
+        [Button]
         public void PauseGame()
         {
-            if (_gameState != GameState.Playing)
+            if (GameState != GameState.Playing)
             {
                 Debug.Log("Game is not playing!");
                 return;
@@ -108,12 +122,13 @@ namespace ShootEmUp
                 }
             }
 
-            _gameState = GameState.Pause;
+            GameState = GameState.Pause;
         }
 
+        [Button]
         public void ResumeGame()
         {
-            if (_gameState != GameState.Pause)
+            if (GameState != GameState.Pause)
             {
                 Debug.Log("Game not paused!");
                 return;
@@ -129,12 +144,28 @@ namespace ShootEmUp
                 }
             }
 
-            _gameState = GameState.Playing;
+            GameState = GameState.Playing;
+        }
+
+        [Button]
+        public void FinishGame()
+        {
+            Debug.Log("Game over!");
+
+            foreach (var gameListener in _gameListeners)
+            {
+                if (gameListener is IGameFinishListener gameFinishListener)
+                {
+                    gameFinishListener.OnFinishGame();
+                }
+            }
+
+            GameState = GameState.Finish;
         }
 
         public void Tick()
         {
-            if (_gameState == GameState.Playing)
+            if (GameState == GameState.Playing)
             {
                 foreach (var gameUpdateListener in _gameUpdateListeners)
                 {
@@ -145,7 +176,7 @@ namespace ShootEmUp
 
         public void FixedTick()
         {
-            if (_gameState == GameState.Playing)
+            if (GameState == GameState.Playing)
             {
                 foreach (var gameFixedUpdateListener in _gameFixedUpdateListeners)
                 {

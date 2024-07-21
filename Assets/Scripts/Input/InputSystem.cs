@@ -10,12 +10,6 @@ namespace ShootEmUp
 
         public event Action OnFire;
 
-        [Inject]
-        public void Construct(GameManager gameManager)
-        {
-            gameManager.Register(this);
-        }
-
         public void OnUpdateGame(float deltaTime)
         {
             if (Input.GetKeyDown(KeyCode.Space))

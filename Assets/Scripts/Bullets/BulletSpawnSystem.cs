@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using VContainer;
 
@@ -6,19 +7,18 @@ namespace ShootEmUp
 {
     public sealed class BulletSpawnSystem : IGameFixedUpdateListener
     {
-        private LevelBounds _levelBounds;
-        private BulletPool _bulletPool;
+        [ShowInInspector, ReadOnly] private LevelBounds _levelBounds;
+        [ShowInInspector, ReadOnly] private BulletPool _bulletPool;
 
         private readonly HashSet<Bullet> _activeBullets = new();
         private readonly List<Bullet> _cache = new();
 
         [Inject]
-        private void Construct(BulletPool bulletPool, LevelBounds levelBounds, GameManager gameManager)
+        private void Construct(BulletPool bulletPool, LevelBounds levelBounds)
         {
+            Debug.Log($"BulletSpawnSystem Construct");
             _levelBounds = levelBounds;
             _bulletPool = bulletPool;
-            gameManager.Register(this);
-            //IGameListener.Register(this);
         }
 
         public void OnFixedUpdateGame(float deltaTime)

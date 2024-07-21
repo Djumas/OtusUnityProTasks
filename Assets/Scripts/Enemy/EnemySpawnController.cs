@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using VContainer;
 
@@ -6,9 +7,9 @@ namespace ShootEmUp
 {
     public sealed class EnemySpawnController : MonoBehaviour
     {
-        private EnemyPool _enemyPool;
+        [ShowInInspector, ReadOnly] private EnemyPool _enemyPool;
         [SerializeField] private GameObject target;
-        private GameManager _gameManager;
+        [ShowInInspector, ReadOnly] private GameManager _gameManager;
 
         [Inject]
         public void Construct(EnemyPool enemyPool, GameManager gameManager)

@@ -14,7 +14,7 @@ namespace ShootEmUp
         [Inject]
         public void Construct(GameManager gameManager)
         {
-            gameManager.Register(this);
+            Debug.Log($"{name} Construct");
         }
 
         public void Move(float horizontalDirection)

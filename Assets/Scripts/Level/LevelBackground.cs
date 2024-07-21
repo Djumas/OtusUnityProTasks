@@ -25,7 +25,8 @@ namespace ShootEmUp
         [Inject]
         public void Construct(GameManager gameManager)
         {
-            gameManager.Register(this);
+            Debug.Log($"{name} Construct");
+            //gameManager.Register(this);
             _startPositionY = mParams.mStartPositionY;
             _endPositionY = mParams.mEndPositionY;
             _movingSpeedY = mParams.mMovingSpeedY;

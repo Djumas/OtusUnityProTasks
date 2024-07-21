@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using VContainer;
 
@@ -7,13 +8,13 @@ namespace ShootEmUp
         IGameFinishListener
     {
         [SerializeField] private WeaponComponent weaponComponent;
-        private InputSystem _inputSystem;
+        [ShowInInspector, ReadOnly] private InputSystem _inputSystem;
 
         [Inject]
         public void Construct(InputSystem inputSystem, GameManager gameManager)
         {
+            Debug.Log($"{name} Construct");
             _inputSystem = inputSystem;
-            gameManager.Register(this);
         }
 
         public void OnPauseGame()

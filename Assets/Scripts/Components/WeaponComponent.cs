@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using VContainer;
 
@@ -5,7 +6,7 @@ namespace ShootEmUp
 {
     public sealed class WeaponComponent : MonoBehaviour
     {
-        private BulletSpawnSystem _bulletSpawnSystem;
+        [ShowInInspector, ReadOnly] private BulletSpawnSystem _bulletSpawnSystem;
         [SerializeField] BulletConfig bulletConfig;
         [SerializeField] private Transform firePoint;
 
