@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Lessons.Architecture.PM
 {
+    [Serializable]
     public sealed class CharacterStat
     {
         public event Action<int> OnValueChanged; 
@@ -19,6 +20,11 @@ namespace Lessons.Architecture.PM
         {
             this.Value = value;
             this.OnValueChanged?.Invoke(value);
+        }
+
+        public CharacterStat(string name)
+        {
+            Name = name;
         }
     }
 }

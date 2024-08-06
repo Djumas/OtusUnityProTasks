@@ -2,16 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace Lessons.Architecture.PM
 {
+    [Serializable]
     public sealed class CharacterInfo
     {
         public event Action<CharacterStat> OnStatAdded;
         public event Action<CharacterStat> OnStatRemoved;
-    
-        [ShowInInspector]
-        private readonly HashSet<CharacterStat> stats = new();
+
+        [ShowInInspector] private HashSet<CharacterStat> stats = new();
 
         [Button]
         public void AddStat(CharacterStat stat)
