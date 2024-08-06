@@ -12,7 +12,7 @@ namespace Lessons.Architecture.PM
         public event Action<CharacterStat> OnStatAdded;
         public event Action<CharacterStat> OnStatRemoved;
 
-        [ShowInInspector] private HashSet<CharacterStat> stats = new();
+        [ShowInInspector, ReadOnly] private HashSet<CharacterStat> stats = new();
 
         [Button]
         public void AddStat(CharacterStat stat)

@@ -1,23 +1,36 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Lessons.Architecture.PM;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using VContainer;
 
+[Serializable]
 public class HeroPopupPresenter
 {
-    private Character _character;
+    private PlayerLevel _playerLevel;
     private HeroPopupView _heroPopupView;
     private StatsBlockPresenter _statsBlockPresenter;
 
     [Inject]
-    public HeroPopupPresenter(Character character)
+    public HeroPopupPresenter(PlayerLevel playerLevel, HeroPopupView heroPopupView, StatsBlockPresenter statsBlockPresenter)
     {
-        _character = character;
+        _playerLevel = playerLevel;
+        _heroPopupView = heroPopupView;
+        _statsBlockPresenter = statsBlockPresenter;
+
     }
 
+    [Button]
     public void ShowPopup()
     {
         _heroPopupView.Show();
-        _statsBlockPresenter.Initialize(_character.GetCharacterInfo().GetStats());
+    }
+    
+    [Button]
+    public void HidePopup()
+    {
+        _heroPopupView.Hide();
     }
 }

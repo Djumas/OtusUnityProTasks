@@ -1,7 +1,8 @@
-using System.Collections.Generic;
+using System;
 using Lessons.Architecture.PM;
 using VContainer;
 
+[Serializable]
 public class StatsBlockPresenter
 {
     private StatsBlockView _statsBlockView;

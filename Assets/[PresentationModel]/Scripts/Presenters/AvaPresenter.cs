@@ -1,8 +1,10 @@
 
+using System;
 using Lessons.Architecture.PM;
 using UnityEngine;
 using VContainer;
 
+[Serializable]
 public class AvaPresenter
 {
     private AvaView _avaView;
@@ -19,6 +21,7 @@ public class AvaPresenter
 
     private void OnIconChanged(Sprite newIcon)
     {
+        Debug.Log("ChangingAva");
         _avaView.ShowAva(newIcon);
     }
 

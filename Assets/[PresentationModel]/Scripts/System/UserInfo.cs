@@ -11,13 +11,13 @@ namespace Lessons.Architecture.PM
         public event Action<string> OnDescriptionChanged;
         public event Action<Sprite> OnIconChanged; 
 
-        [ShowInInspector]
+        [ShowInInspector, ReadOnly]
         public string Name { get; private set; }
 
-        [ShowInInspector]
+        [ShowInInspector, ReadOnly]
         public string Description { get; private set; }
 
-        [ShowInInspector]
+        [ShowInInspector, ReadOnly]
         public Sprite Icon { get; private set; }
 
         [Button]
