@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
@@ -12,6 +13,11 @@ public class HeroPopupHelper : MonoBehaviour
     private void Construct(HeroPopupPresenter heroPopupPresenter)
     {
         _heroPopupPresenter = heroPopupPresenter;
+    }
+
+    private void Awake()
+    {
+        HidePopup();
     }
 
     [Button]

@@ -8,14 +8,17 @@ public class ProgressBarPresenter
 {
     private ProgressBarView _progressBarView;
     private PlayerLevel _playerLevel;
+    private HeroPopupPresenter _heroPopupPresenter;
 
     [Inject]
-    private ProgressBarPresenter(PlayerLevel playerLevel, ProgressBarView progressBarView)
+    private ProgressBarPresenter(PlayerLevel playerLevel, ProgressBarView progressBarView, HeroPopupPresenter heroPopupPresenter)
     {
         _playerLevel = playerLevel;
         _playerLevel.OnExperienceChanged += OnExperienceChanged;
         _playerLevel.OnLevelUp += OnLevelUp;
         _progressBarView = progressBarView;
+        _heroPopupPresenter = heroPopupPresenter;
+        _heroPopupPresenter.OnShow += UpdateProgressBar;
     }
 
     private void OnExperienceChanged(int experience)
@@ -25,6 +28,11 @@ public class ProgressBarPresenter
 
     private void OnLevelUp()
     {
+        UpdateProgressBar();
+    }
+
+    private void UpdateProgressBar()
+    {
         _progressBarView.ShowExperience(_playerLevel.CurrentExperience,_playerLevel.RequiredExperience);
     }
 
@@ -32,5 +40,6 @@ public class ProgressBarPresenter
     {
         _playerLevel.OnExperienceChanged -= OnExperienceChanged;
         _playerLevel.OnLevelUp -= OnLevelUp;
+        _heroPopupPresenter.OnShow -= UpdateProgressBar;
     }
 }

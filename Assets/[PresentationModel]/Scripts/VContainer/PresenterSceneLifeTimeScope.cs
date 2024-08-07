@@ -8,7 +8,7 @@ namespace PresentationModel
     {
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterComponentInHierarchy<StatsBlockView>().AsSelf();
+            builder.RegisterComponentInHierarchy<PropertiesBlockView>().AsSelf();
             builder.RegisterComponentInHierarchy<HeroPopupView>().AsSelf();
             builder.RegisterComponentInHierarchy<AvaView>().AsSelf();
             builder.RegisterComponentInHierarchy<DescriptionView>().AsSelf();
@@ -21,11 +21,12 @@ namespace PresentationModel
             builder.Register<PlayerLevel>(Lifetime.Scoped).AsSelf();
            
             builder.Register<HeroPopupPresenter>(Lifetime.Scoped).AsSelf();
-            builder.Register<StatsBlockPresenter>(Lifetime.Scoped).AsSelf();
+            builder.Register<PropertiesBlockPresenter>(Lifetime.Scoped).AsSelf();
             builder.Register<AvaPresenter>(Lifetime.Scoped).AsSelf();
             builder.Register<DescriptionPresenter>(Lifetime.Scoped).AsSelf();
             builder.Register<ProgressBarPresenter>(Lifetime.Scoped).AsSelf();
             builder.Register<NickNamePresenter>(Lifetime.Scoped).AsSelf();
+            builder.Register<LevelPresenter>(Lifetime.Scoped).AsSelf();
 
         }
     }

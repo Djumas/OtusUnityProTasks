@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8852068162305220721}
-  - component: {fileID: 7377834780977783759}
+  - component: {fileID: 2507401347514511019}
   m_Layer: 5
   m_Name: PointedProperty
   m_TagString: Untagged
@@ -39,7 +39,7 @@ RectTransform:
   m_AnchoredPosition: {x: -228, y: -82}
   m_SizeDelta: {x: 326, y: 44}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7377834780977783759
+--- !u!114 &2507401347514511019
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

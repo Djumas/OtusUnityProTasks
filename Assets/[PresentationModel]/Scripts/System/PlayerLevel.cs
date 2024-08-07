@@ -44,5 +44,22 @@ namespace Lessons.Architecture.PM
         {
             return this.CurrentExperience == this.RequiredExperience;
         }
+        
+        public void SetLoadedLevel(int loadedLevel)
+        {
+            CurrentLevel = loadedLevel;
+            var xp = Math.Min(this.CurrentExperience, this.RequiredExperience);
+            this.CurrentExperience = xp;
+            this.OnLevelUp?.Invoke();
+            this.OnExperienceChanged?.Invoke(xp);
+        }
+
+        public void SetLoadedExperience(int loadedExperience)
+        {
+            var xp = Math.Min(loadedExperience, this.RequiredExperience);
+            this.CurrentExperience = xp;
+            this.OnLevelUp?.Invoke();
+            this.OnExperienceChanged?.Invoke(xp);
+        }
     }
 }

@@ -5,16 +5,28 @@ using UnityEngine.UI;
 
 public class HeroPopupView : MonoBehaviour
 {
-    [SerializeField] private Button closeButton;
-    [SerializeField] private Button levelUpButton;
+    public Button closeButton;
+    public Button levelUpButton;
 
-    public Action onCloseButtonClicked;
-    public Action onLevelUpButtonClicked;
+    public event Action OnCloseButtonClicked;
+    public event Action OnLevelUpButtonClicked;
 
     private void Awake()
     {
-        closeButton.onClick.AddListener(onCloseButtonClicked.Invoke);
-        levelUpButton.onClick.AddListener(onLevelUpButtonClicked.Invoke);
+        closeButton.onClick.AddListener(OnCloseButtonClicked.Invoke);
+        levelUpButton.onClick.AddListener(OnLevelUpButtonClicked.Invoke);
+    }
+    
+    
+
+    public void EnableLevelUpButton()
+    {
+        levelUpButton.interactable = true;
+    }
+    
+    public void DisableLevelUpButton()
+    {
+        levelUpButton.interactable = false;
     }
 
     [Button]
@@ -31,7 +43,7 @@ public class HeroPopupView : MonoBehaviour
 
     private void OnDestroy()
     {
-        closeButton.onClick.RemoveListener(onCloseButtonClicked.Invoke);
-        levelUpButton.onClick.RemoveListener(onLevelUpButtonClicked.Invoke);
+        closeButton.onClick.RemoveListener(OnCloseButtonClicked.Invoke);
+        levelUpButton.onClick.RemoveListener(OnLevelUpButtonClicked.Invoke);
     }
 }

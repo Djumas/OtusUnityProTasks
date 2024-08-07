@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 public class CharacterInfoHelper : MonoBehaviour
 {
-    [ShowInInspector] private CharacterInfo _characterInfo;
+    [ShowInInspector] public CharacterInfo _characterInfo;
 
     [Inject]
     public void Construct(CharacterInfo characterInfo)
@@ -22,6 +22,13 @@ public class CharacterInfoHelper : MonoBehaviour
         var stat = new CharacterStat(statName.ToString());
         stat.ChangeValue(value);
         _characterInfo.AddStat(stat);
+    }
+    
+    [Button]
+    public void RemoveStat(StatType statName)
+    {
+        var stat = _characterInfo.GetStat(statName.ToString());
+        _characterInfo.RemoveStat(stat);
     }
 
     [Button]
