@@ -19,7 +19,6 @@ public class PropertiesBlockPresenter
     [ShowInInspector, ReadOnly] private List<PropertyView> _propertyViewsOccupied = new();
     [ShowInInspector, ReadOnly] private List<PropertyPresenter> _propertyPresenters = new();
  
-    [Inject]
     public PropertiesBlockPresenter(PropertiesBlockView propertiesBlockView, CharacterInfo characterInfo, HeroPopupPresenter heroPopupPresenter)
     {
         _propertiesBlockView = propertiesBlockView;

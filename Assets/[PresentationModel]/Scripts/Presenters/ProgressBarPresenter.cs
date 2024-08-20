@@ -10,8 +10,7 @@ public class ProgressBarPresenter
     private PlayerLevel _playerLevel;
     private HeroPopupPresenter _heroPopupPresenter;
 
-    [Inject]
-    private ProgressBarPresenter(PlayerLevel playerLevel, ProgressBarView progressBarView, HeroPopupPresenter heroPopupPresenter)
+    public ProgressBarPresenter(PlayerLevel playerLevel, ProgressBarView progressBarView, HeroPopupPresenter heroPopupPresenter)
     {
         _playerLevel = playerLevel;
         _playerLevel.OnExperienceChanged += OnExperienceChanged;

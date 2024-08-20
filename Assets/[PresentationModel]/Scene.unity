@@ -255,7 +255,7 @@ GameObject:
   - component: {fileID: 86927826}
   - component: {fileID: 86927827}
   m_Layer: 5
-  m_Name: ProgressBar
+  m_Name: ProgressBarBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -298,50 +298,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barView: {fileID: 706728355}
   text: {fileID: 905029702}
---- !u!1 &186293510
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 186293511}
-  - component: {fileID: 186293512}
-  m_Layer: 0
-  m_Name: Debug
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &186293511
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 186293510}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 783994166}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &186293512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 186293510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e5e22e177dc2c0469497161e22519b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &209637532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,7 +1144,6 @@ Transform:
   m_Children:
   - {fileID: 961138084}
   - {fileID: 1021359843}
-  - {fileID: 186293511}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1453,6 +1408,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d033846b8ac0b5d419c8fd6a8e0a97e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  portraitView: {fileID: 1581496716}
+  descriptionView: {fileID: 400044427}
+  progressBarView: {fileID: 86927827}
+  nicknameView: {fileID: 669550720}
+  propertiesBlockView: {fileID: 209637535}
+  levelView: {fileID: 400044428}
   closeButton: {fileID: 6101770}
   levelUpButton: {fileID: 452791545}
 --- !u!1 &961138083
@@ -2834,7 +2795,7 @@ GameObject:
   - component: {fileID: 1581496715}
   - component: {fileID: 1581496716}
   m_Layer: 5
-  m_Name: HeroPortrait
+  m_Name: HeroPortraitBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

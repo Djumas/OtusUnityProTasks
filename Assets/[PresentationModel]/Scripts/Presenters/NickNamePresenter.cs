@@ -8,9 +8,8 @@ public class NickNamePresenter
     private UserInfo _userInfo;
     private NicknameView _nicknameView;
     private HeroPopupPresenter _heroPopupPresenter;
-
-    [Inject]
-    private NickNamePresenter(UserInfo userInfo, NicknameView nicknameView, HeroPopupPresenter heroPopupPresenter)
+    
+    public NickNamePresenter(UserInfo userInfo, NicknameView nicknameView, HeroPopupPresenter heroPopupPresenter)
     {
         _userInfo = userInfo;
         _userInfo.OnNameChanged += OnNameChanged;

@@ -5,14 +5,13 @@ using UnityEngine;
 using VContainer;
 
 [Serializable]
-public class AvaPresenter
+public class PortraitPresenter
 {
     private PortraitView _portraitView;
     private UserInfo _userInfo;
     private HeroPopupPresenter _heroPopupPresenter;
 
-    [Inject]
-    public AvaPresenter(PortraitView portraitView, UserInfo userInfo, HeroPopupPresenter heroPopupPresenter)
+    public PortraitPresenter(PortraitView portraitView, UserInfo userInfo, HeroPopupPresenter heroPopupPresenter)
 
     {
         _portraitView = portraitView;
@@ -33,7 +32,7 @@ public class AvaPresenter
         _portraitView.ShowAva(_userInfo.Icon);
     }
 
-    ~AvaPresenter()
+    ~PortraitPresenter()
     {
         _userInfo.OnIconChanged -= OnIconChanged; 
         _heroPopupPresenter.OnShow -= UpdateAva;

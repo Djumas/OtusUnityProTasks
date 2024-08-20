@@ -2,16 +2,40 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
 
 public class HeroPopupView : MonoBehaviour
 {
+
+    [SerializeField] private PortraitView portraitView;
+    [SerializeField] private DescriptionView descriptionView;
+    [SerializeField] private ProgressBarView progressBarView;
+    [SerializeField] private NicknameView nicknameView;
+    [SerializeField] private PropertiesBlockView propertiesBlockView;
+    [SerializeField] private LevelView levelView;
+
+    public PortraitView PortraitView => portraitView;
+    public DescriptionView DescriptionView => descriptionView;
+    public ProgressBarView ProgressBarView => progressBarView;
+    public NicknameView NicknameView => nicknameView;
+    public PropertiesBlockView PropertiesBlockView => propertiesBlockView;
+    public LevelView LevelView => levelView;
+
+
+    [ShowInInspector] private HeroPopupPresenter _heroPopupPresenter;
+
     public Button closeButton;
     public Button levelUpButton;
 
     public event Action OnCloseButtonClicked;
     public event Action OnLevelUpButtonClicked;
 
-    private void Awake()
+    public void SetPresenter(HeroPopupPresenter heroPopupPresenter)
+    {
+        _heroPopupPresenter = heroPopupPresenter;
+    }
+
+    private void Awake ()
     {
         closeButton.onClick.AddListener(OnCloseButtonClickedHandler);
         levelUpButton.onClick.AddListener(OnLevelUpButtonClickedHandler);
@@ -38,13 +62,13 @@ public class HeroPopupView : MonoBehaviour
         levelUpButton.interactable = false;
     }
 
-    [Button]
+    //[Button]
     public void Show()
     {
         this.gameObject.SetActive(true);
     }
     
-    [Button]
+    //[Button]
     public void Hide()
     {
         this.gameObject.SetActive(false);

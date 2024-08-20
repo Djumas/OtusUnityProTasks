@@ -7,9 +7,8 @@ public class LevelPresenter
     private PlayerLevel _playerLevel;
     private LevelView _levelView;
     private HeroPopupPresenter _heroPopupPresenter;
-
-    [Inject]
-    private LevelPresenter(PlayerLevel playerLevel, LevelView levelView, HeroPopupPresenter heroPopupPresenter)
+    
+    public LevelPresenter(PlayerLevel playerLevel, LevelView levelView, HeroPopupPresenter heroPopupPresenter)
     {
         _playerLevel = playerLevel;
         _playerLevel.OnLevelUp += OnLevelUp;

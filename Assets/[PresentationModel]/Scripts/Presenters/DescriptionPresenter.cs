@@ -9,7 +9,7 @@ public class DescriptionPresenter
     private DescriptionView _descriptionView;
     private HeroPopupPresenter _heroPopupPresenter;
 
-    private DescriptionPresenter(UserInfo userInfo, DescriptionView descriptionView, HeroPopupPresenter heroPopupPresenter)
+    public DescriptionPresenter(UserInfo userInfo, DescriptionView descriptionView, HeroPopupPresenter heroPopupPresenter)
     {
         _userInfo = userInfo;
         _userInfo.OnDescriptionChanged += OnDescriptionChanged;
