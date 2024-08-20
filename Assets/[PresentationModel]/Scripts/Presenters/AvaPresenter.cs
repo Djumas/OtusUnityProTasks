@@ -7,15 +7,15 @@ using VContainer;
 [Serializable]
 public class AvaPresenter
 {
-    private AvaView _avaView;
+    private PortraitView _portraitView;
     private UserInfo _userInfo;
     private HeroPopupPresenter _heroPopupPresenter;
 
     [Inject]
-    public AvaPresenter(AvaView avaView, UserInfo userInfo, HeroPopupPresenter heroPopupPresenter)
+    public AvaPresenter(PortraitView portraitView, UserInfo userInfo, HeroPopupPresenter heroPopupPresenter)
 
     {
-        _avaView = avaView;
+        _portraitView = portraitView;
         _userInfo = userInfo;
         _userInfo.OnIconChanged += OnIconChanged;
         _heroPopupPresenter = heroPopupPresenter;
@@ -25,12 +25,12 @@ public class AvaPresenter
     private void OnIconChanged(Sprite newIcon)
     {
         Debug.Log("ChangingAva");
-        _avaView.ShowAva(newIcon);
+        _portraitView.ShowAva(newIcon);
     }
 
     private void UpdateAva()
     {
-        _avaView.ShowAva(_userInfo.Icon);
+        _portraitView.ShowAva(_userInfo.Icon);
     }
 
     ~AvaPresenter()

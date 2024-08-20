@@ -10,7 +10,7 @@ namespace PresentationModel
         {
             builder.RegisterComponentInHierarchy<PropertiesBlockView>().AsSelf();
             builder.RegisterComponentInHierarchy<HeroPopupView>().AsSelf();
-            builder.RegisterComponentInHierarchy<AvaView>().AsSelf();
+            builder.RegisterComponentInHierarchy<PortraitView>().AsSelf();
             builder.RegisterComponentInHierarchy<DescriptionView>().AsSelf();
             builder.RegisterComponentInHierarchy<ProgressBarView>().AsSelf();
             builder.RegisterComponentInHierarchy<LevelView>().AsSelf();

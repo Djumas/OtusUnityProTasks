@@ -13,11 +13,20 @@ public class HeroPopupView : MonoBehaviour
 
     private void Awake()
     {
-        closeButton.onClick.AddListener(OnCloseButtonClicked.Invoke);
-        levelUpButton.onClick.AddListener(OnLevelUpButtonClicked.Invoke);
+        closeButton.onClick.AddListener(OnCloseButtonClickedHandler);
+        levelUpButton.onClick.AddListener(OnLevelUpButtonClickedHandler);
+    }
+
+    private void OnCloseButtonClickedHandler()
+    {
+        OnCloseButtonClicked?.Invoke();
     }
     
-    
+    private void OnLevelUpButtonClickedHandler()
+    {
+        OnLevelUpButtonClicked?.Invoke();
+    }
+
 
     public void EnableLevelUpButton()
     {
@@ -43,7 +52,7 @@ public class HeroPopupView : MonoBehaviour
 
     private void OnDestroy()
     {
-        closeButton.onClick.RemoveListener(OnCloseButtonClicked.Invoke);
-        levelUpButton.onClick.RemoveListener(OnLevelUpButtonClicked.Invoke);
+        closeButton.onClick.RemoveListener(OnCloseButtonClickedHandler);
+        levelUpButton.onClick.RemoveListener(OnLevelUpButtonClickedHandler);
     }
 }
