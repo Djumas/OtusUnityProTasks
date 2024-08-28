@@ -3,17 +3,18 @@ using Lessons.Architecture.PM;
 using Sirenix.OdinInspector;
 using CharacterInfo = Lessons.Architecture.PM.CharacterInfo;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VContainer;
 using Random = UnityEngine.Random;
 
 public class CharacterInfoHelper : MonoBehaviour
 {
-    [ShowInInspector] public CharacterInfo _characterInfo;
+    public CharacterInfo characterInfo;
 
     [Inject]
-    public void Construct(CharacterInfo characterInfo)
+    public void Construct(CharacterInfo mCharacterInfo)
     {
-        _characterInfo = characterInfo;
+        this.characterInfo = mCharacterInfo;
     }
 
     [Button]
@@ -21,14 +22,14 @@ public class CharacterInfoHelper : MonoBehaviour
     {
         var stat = new CharacterStat(statName.ToString());
         stat.ChangeValue(value);
-        _characterInfo.AddStat(stat);
+        characterInfo.AddStat(stat);
     }
     
     [Button]
     public void RemoveStat(StatType statName)
     {
-        var stat = _characterInfo.GetStat(statName.ToString());
-        _characterInfo.RemoveStat(stat);
+        var stat = characterInfo.GetStat(statName.ToString());
+        characterInfo.RemoveStat(stat);
     }
 
     [Button]
@@ -40,7 +41,7 @@ public class CharacterInfoHelper : MonoBehaviour
             var stat = new CharacterStat(statType.ToString());
             stat.ChangeValue(Random.Range(0, 100));
             
-            _characterInfo.AddStat(stat);
+            characterInfo.AddStat(stat);
         }
     }
 }

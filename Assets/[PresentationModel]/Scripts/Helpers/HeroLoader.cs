@@ -23,11 +23,11 @@ public class HeroLoader : MonoBehaviour
     [Button]
     public void LoadHero()
     {
-        _userInfo.ChangeName(heroSO.NickName);
-        _userInfo.ChangeDescription(heroSO.Description);
+        _userInfo.ChangeName(heroSO.nickName);
+        _userInfo.ChangeDescription(heroSO.description);
         _userInfo.ChangeIcon(heroSO.icon);
 
-        foreach (var characterStat in heroSO.CharacterStats)
+        foreach (var characterStat in heroSO.characterStats)
         {
             _characterInfo.AddStat(characterStat);
         }

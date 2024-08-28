@@ -1,20 +1,20 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Lessons.Architecture.PM;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "HeroSO", menuName = "ScriptableObjects/HeroSO", order = 1)]
 public class HeroSO : ScriptableObject
 {
-   public string NickName;
-   public string Description;
+   public string nickName;
+   public string description;
    public Sprite icon;
    public int level;
    public int experience;
-   public CharacterStat[] CharacterStats;
+   [SerializeField] public CharacterStat[] characterStats;
 
    [Button]
    public void AddRandomStats()
@@ -27,6 +27,6 @@ public class HeroSO : ScriptableObject
          stat.ChangeValue(Random.Range(0, 100));
          characterStatsList.Add(stat);
       }
-      CharacterStats = characterStatsList.ToArray();
+      characterStats = characterStatsList.ToArray();
    }
 }

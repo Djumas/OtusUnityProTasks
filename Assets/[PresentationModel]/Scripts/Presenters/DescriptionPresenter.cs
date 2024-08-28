@@ -1,21 +1,17 @@
 using System;
 using Lessons.Architecture.PM;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class DescriptionPresenter
 {
-    private UserInfo _userInfo;
-    private DescriptionView _descriptionView;
-    private HeroPopupPresenter _heroPopupPresenter;
+    private readonly UserInfo _userInfo;
+    private readonly DescriptionView _descriptionView;
 
-    public DescriptionPresenter(UserInfo userInfo, DescriptionView descriptionView, HeroPopupPresenter heroPopupPresenter)
+    public DescriptionPresenter(UserInfo userInfo, DescriptionView descriptionView)
     {
         _userInfo = userInfo;
         _userInfo.OnDescriptionChanged += OnDescriptionChanged;
         _descriptionView = descriptionView;
-        _heroPopupPresenter = heroPopupPresenter;
-        _heroPopupPresenter.OnShow += UpdateDescription;
     }
 
     private void OnDescriptionChanged(String newDescription)
@@ -24,7 +20,7 @@ public class DescriptionPresenter
         _descriptionView.ShowDescription(newDescription);
     }
 
-    private void UpdateDescription()
+    public void Update()
     {
         _descriptionView.ShowDescription(_userInfo.Description);
     }
@@ -32,6 +28,5 @@ public class DescriptionPresenter
     ~DescriptionPresenter()
     {
         _userInfo.OnDescriptionChanged -= OnDescriptionChanged;
-        _heroPopupPresenter.OnShow -= UpdateDescription;
     }
 }

@@ -1,21 +1,17 @@
 using System;
 using Lessons.Architecture.PM;
 using UnityEngine;
-using VContainer;
 
 public class NickNamePresenter
 {
-    private UserInfo _userInfo;
-    private NicknameView _nicknameView;
-    private HeroPopupPresenter _heroPopupPresenter;
+    private readonly UserInfo _userInfo;
+    private readonly NicknameView _nicknameView;
     
-    public NickNamePresenter(UserInfo userInfo, NicknameView nicknameView, HeroPopupPresenter heroPopupPresenter)
+    public NickNamePresenter(UserInfo userInfo, NicknameView nicknameView)
     {
         _userInfo = userInfo;
         _userInfo.OnNameChanged += OnNameChanged;
         _nicknameView = nicknameView;
-        _heroPopupPresenter = heroPopupPresenter;
-        _heroPopupPresenter.OnShow += UpdateName;
     }
 
     private void OnNameChanged(String newName)
@@ -24,7 +20,7 @@ public class NickNamePresenter
         _nicknameView.ShowNickname(newName);
     }
 
-    private void UpdateName()
+    public void Update()
     {
         _nicknameView.ShowNickname(_userInfo.Name);
     }
@@ -32,6 +28,5 @@ public class NickNamePresenter
     ~NickNamePresenter()
     {
         _userInfo.OnNameChanged -= OnNameChanged;
-        _heroPopupPresenter.OnShow -= UpdateName;
     }
 }

@@ -6,8 +6,8 @@ using UnityEngine;
 [Serializable]
 public class PropertyPresenter
 {
-    private CharacterStat _characterStat;
-    private PropertyView _propertyView;
+    private readonly CharacterStat _characterStat;
+    private readonly PropertyView _propertyView;
     
     public PropertyPresenter(CharacterStat characterStat,PropertyView propertyView)
     {

@@ -2,7 +2,6 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
-using VContainer;
 
 public class HeroPopupView : MonoBehaviour
 {

@@ -1,29 +1,25 @@
 using Lessons.Architecture.PM;
 using UnityEngine;
-using VContainer;
 
 public class LevelPresenter
 {
-    private PlayerLevel _playerLevel;
-    private LevelView _levelView;
-    private HeroPopupPresenter _heroPopupPresenter;
+    private readonly PlayerLevel _playerLevel;
+    private readonly LevelView _levelView;
     
-    public LevelPresenter(PlayerLevel playerLevel, LevelView levelView, HeroPopupPresenter heroPopupPresenter)
+    public LevelPresenter(PlayerLevel playerLevel, LevelView levelView)
     {
         _playerLevel = playerLevel;
         _playerLevel.OnLevelUp += OnLevelUp;
         _levelView = levelView;
-        _heroPopupPresenter = heroPopupPresenter;
-        _heroPopupPresenter.OnShow += UpdateLevel;
     }
 
     private void OnLevelUp()
     {
         Debug.Log("Level up");
-        UpdateLevel();
+        Update();
     }
 
-    private void UpdateLevel()
+    public void Update()
     {
         Debug.Log("Level updated");
         _levelView.ShowLevel(_playerLevel.CurrentLevel);
@@ -32,6 +28,5 @@ public class LevelPresenter
     ~LevelPresenter()
     {
         _playerLevel.OnLevelUp -= OnLevelUp;
-        _heroPopupPresenter.OnShow -= UpdateLevel;
     }
 }

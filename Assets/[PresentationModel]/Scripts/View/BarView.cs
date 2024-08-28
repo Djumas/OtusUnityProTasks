@@ -1,9 +1,7 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
 using UniRx;
-using UnityEngine.Serialization;
 
 namespace PresentationModel
 {
