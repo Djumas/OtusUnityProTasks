@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a771902dccbae4b98aa3d79ce1252a, type: 3}
   m_Name: HeroSO
   m_EditorClassIdentifier: 
-  NickName: Buba
-  Description: Mega Orc
+  nickName: Buba
+  description: Super Orc
   icon: {fileID: 21300000, guid: 7c0892898786946a98a1057c9873611a, type: 3}
   level: 15
   experience: 500
-  CharacterStats: []
+  characterStats: []
