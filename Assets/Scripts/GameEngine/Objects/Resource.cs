@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace GameEngine
@@ -8,6 +9,7 @@ namespace GameEngine
         public string ID
         {
             get => id;
+            set => id = value; // TODO: выяснить, как предполагалось создавать ресурсы;
         }
 
         public int Amount

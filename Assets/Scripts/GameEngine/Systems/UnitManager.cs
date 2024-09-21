@@ -16,14 +16,16 @@ namespace GameEngine
         [ShowInInspector, ReadOnly]
         private HashSet<Unit> sceneUnits = new();
 
-        public UnitManager()
+        
+        //TODO: Спросить, что за хрень с конструкторами?
+        /*public UnitManager()
         {
         }
 
         public UnitManager(Transform container)
         {
             this.container = container;
-        }
+        }*/
         
         public void SetupUnits(IEnumerable<Unit> units)
         {
