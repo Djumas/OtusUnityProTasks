@@ -17,7 +17,7 @@ namespace GameEngine
         private HashSet<Unit> sceneUnits = new();
 
         
-        //TODO: Спросить, что за хрень с конструкторами?
+        //TODO: Спросить, как быть с конструкторами?
         /*public UnitManager()
         {
         }
