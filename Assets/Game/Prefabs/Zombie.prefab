@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 7964997623459932075}
   - component: {fileID: 354380326650615950}
   - component: {fileID: 6486345383869258}
+  - component: {fileID: 1008797446731627138}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -90,7 +91,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5879414446769212800}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.8921175, y: 0, z: -0.4483323}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -129,6 +130,31 @@ CapsuleCollider:
   m_Height: 2.4435
   m_Direction: 1
   m_Center: {x: 0, y: 1.27, z: 0}
+--- !u!114 &1008797446731627138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5879414446769212800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ef1663bebaff2f4c98b931395b8cb54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zombieCore:
+    moveComponent:
+      moveDirection:
+        value: {x: 0, y: 0, z: 0}
+      root: {fileID: 7964997623459932075}
+      speed: 0.5
+    rotationComponent:
+      rotationDirection:
+        value: {x: 0, y: 0, z: 0}
+      root: {fileID: 7964997623459932075}
+      enable: 0
+    lifeComponent:
+      currentHP: 5
 --- !u!1001 &1696610920246370783
 PrefabInstance:
   m_ObjectHideFlags: 0

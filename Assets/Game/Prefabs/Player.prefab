@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 3006422773680130874}
   - component: {fileID: 1847985737784961614}
   - component: {fileID: 2691131583617265358}
+  - component: {fileID: 964388294}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -97,6 +98,38 @@ CapsuleCollider:
   m_Height: 2.15
   m_Direction: 1
   m_Center: {x: 0, y: 0.96, z: 0}
+--- !u!114 &964388294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6378945258768650400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdf44b406de99f94ab38cb3fe50ceeab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCore:
+    moveComponent:
+      moveDirection:
+        value: {x: 0, y: 0, z: 0}
+      root: {fileID: 3006422773680130874}
+      speed: 5
+    rotationComponent:
+      rotationDirection:
+        value: {x: 0, y: 0, z: 0}
+      root: {fileID: 3006422773680130874}
+      enable: 1
+    shootComponent:
+      firepoint: {fileID: 1067890634428359185}
+      bulletPrefab: {fileID: 7071663250927276774, guid: 7f12394cd99a93a4c8a18e1a0b1cbf06,
+        type: 3}
+      coolDown: 0.2
+      isGunReady: 1
+      coolDownLeft: 0
+    lifeComponent:
+      currentHP: 10
 --- !u!1 &8550233314304206884
 GameObject:
   m_ObjectHideFlags: 0
