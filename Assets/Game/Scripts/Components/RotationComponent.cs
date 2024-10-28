@@ -16,6 +16,7 @@ public class RotationComponent : IAtomicUpdate
     {
         if (enable)
         {
+            if (rotationDirection.Value == Vector3.zero) return;
             var rotation = Quaternion.LookRotation(rotationDirection.Value, Vector3.up);
             root.rotation = rotation;
         }

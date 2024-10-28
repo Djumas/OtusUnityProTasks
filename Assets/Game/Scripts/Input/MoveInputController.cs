@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class MoveController : MonoBehaviour
+public class MoveInputController : MonoBehaviour
 {
     [SerializeField] private AtomicEntity player;
     [SerializeField] private Camera mCamera;

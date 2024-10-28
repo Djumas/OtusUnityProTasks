@@ -4,7 +4,17 @@ using UnityEngine;
 [Serializable]
 public class ZombieCore
 {
-    [SerializeField] public MoveComponent moveComponent;
-    [SerializeField] public RotationComponent rotationComponent;
-    [SerializeField] public LifeComponent lifeComponent;
+    public ZombieAIController zombieAIController;
+    
+    public MoveComponent moveComponent;
+    public RotationComponent rotationComponent;
+    public LifeComponent lifeComponent;
+    public RootTransformComponent rootTransformComponent;
+    public SeekTargetComponent seekTargetComponent;
+    public AttackParametersComponent attackParametersComponent;
+    
+    public LookAtTargetMechanics lookAtTargetMechanics;
+    public PursueTargetMechanics pursueTargetMechanics;
+    public DoDamageMechanics doDamageMechanics;
+    public CooldownMeleeAttackMechanics cooldownMeleeAttackMechanics;
 }

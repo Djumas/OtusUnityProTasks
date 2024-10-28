@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using Atomic.Elements;
-using Atomic.Extensions;
 using Atomic.Objects;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class ShootController : MonoBehaviour
+public class ShootInputController : MonoBehaviour
 {
     [SerializeField] private AtomicEntity player;
 

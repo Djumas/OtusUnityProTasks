@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 547293376}
   - component: {fileID: 547293377}
   m_Layer: 0
-  m_Name: MoveController
+  m_Name: MoveInputController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1114,6 +1114,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6378945258768650400, guid: 3b5b2ae0f895574449961910366cbf8a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 7627297604819324370, guid: 3b5b2ae0f895574449961910366cbf8a,
         type: 3}
       propertyPath: m_Layer
@@ -1420,7 +1425,7 @@ GameObject:
   - component: {fileID: 1513960410}
   - component: {fileID: 1513960411}
   m_Layer: 0
-  m_Name: ShootController
+  m_Name: ShootInputController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1461,11 +1466,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1008797446731627138, guid: a76c89c6a539356478cffc6e1b88e8dc,
-        type: 3}
-      propertyPath: zombieCore.rotationComponent.enable
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5879414446769212800, guid: a76c89c6a539356478cffc6e1b88e8dc,
         type: 3}
       propertyPath: m_Name
@@ -1484,7 +1484,7 @@ PrefabInstance:
     - target: {fileID: 7964997623459932075, guid: a76c89c6a539356478cffc6e1b88e8dc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7964997623459932075, guid: a76c89c6a539356478cffc6e1b88e8dc,
         type: 3}

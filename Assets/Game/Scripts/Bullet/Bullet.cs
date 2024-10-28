@@ -1,20 +1,25 @@
+using System;
 using Atomic.Elements;
+using Atomic.Extensions;
 using Atomic.Objects;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Bullet : AtomicObject
 {
     [Get(MoveAPI.MoveDirection)] public AtomicVariable<Vector3> _moveDirection => _moveComponent.moveDirection;
-    
+
     [SerializeField] private MoveComponent _moveComponent;
-    [SerializeField] private BulletFlyMechanics _bulletFlyMechanics;
-    [SerializeField] private DoDamageMechanics _doDamageMechanics;
+    [SerializeField] private MoveForwardController moveForwardController;
+    [SerializeField] private int damage;
+
+    private readonly DoDamageMechanics _doDamageMechanics = new();
 
 
     private void Awake()
     {
         AddLogic(_moveComponent);
-        AddLogic(_bulletFlyMechanics);
+        AddLogic(moveForwardController);
     }
 
     private void Update()
@@ -24,17 +29,27 @@ public class Bullet : AtomicObject
 
     private void FixedUpdate()
     {
-        OnFixedUpdate(Time.fixedDeltaTime);    
+        OnFixedUpdate(Time.fixedDeltaTime);
+    }
+
+    private void OnEnable()
+    {
+        Enable();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        //TODO: Вынести нанесение урона в отдельную механику.
         var atomicObject = other.GetComponent<AtomicObject>();
         if (atomicObject)
         {
-            _doDamageMechanics.DoDamage(atomicObject);
+            var isDeadVariable = atomicObject.GetVariable<bool>(LifeAPI.IsDead);
+            if (isDeadVariable != null)
+            {
+                if (atomicObject.GetVariable<bool>(LifeAPI.IsDead).Value) return;
+                _doDamageMechanics.DoDamage(atomicObject, damage);
+            }
         }
-        GameObject.Destroy(gameObject);
+
+        Destroy(gameObject);
     }
 }

@@ -130,6 +130,11 @@ MonoBehaviour:
       coolDownLeft: 0
     lifeComponent:
       currentHP: 10
+      isDead:
+        value: 0
+    rootTransformComponent:
+      rootTransform:
+        value: {fileID: 3006422773680130874}
 --- !u!1 &8550233314304206884
 GameObject:
   m_ObjectHideFlags: 0

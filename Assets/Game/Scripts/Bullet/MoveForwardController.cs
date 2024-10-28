@@ -4,12 +4,12 @@ using Atomic.Objects;
 using UnityEngine;
 
 [Serializable]
-public class BulletFlyMechanics : IAtomicUpdate
+public class MoveForwardController : IAtomicEnable
 {
     [SerializeField] private AtomicObject bullet;
     [SerializeField] private Transform root;
 
-    public void OnUpdate(float deltaTime)
+    public void Enable()
     {
         bullet.GetVariable<Vector3>(MoveAPI.MoveDirection).Value = root.forward;
     }

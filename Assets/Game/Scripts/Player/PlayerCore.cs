@@ -6,8 +6,9 @@ using UnityEngine;
 [Serializable]
 public class PlayerCore
 {
-    [SerializeField] public MoveComponent moveComponent;
-    [SerializeField] public RotationComponent rotationComponent;
-    [SerializeField] public ShootComponent shootComponent;
-    [SerializeField] public LifeComponent lifeComponent;
+    public MoveComponent moveComponent;
+    public RotationComponent rotationComponent;
+    public ShootComponent shootComponent;
+    public LifeComponent lifeComponent;
+    public RootTransformComponent rootTransformComponent;
 }

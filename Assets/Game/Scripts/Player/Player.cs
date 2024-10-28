@@ -10,6 +10,7 @@ public class Player : AtomicObject
     [Get(ShootAPI.ShootRequest)] public AtomicEvent _shootRequest => playerCore.shootComponent.shootRequest;
     [Get(ShootAPI.ShootAction)] public AtomicEvent _shootAction => playerCore.shootComponent.shootAction;
     [Get(LifeAPI.TakeDamageAction)] public AtomicEvent<int> _takeDamageAction => playerCore.lifeComponent.TakeDamageAction;
+    [Get(MoveAPI.RootTransform)] public AtomicVariable<Transform> _rootTransform => playerCore.rootTransformComponent.rootTransform;
     
     [SerializeField] private PlayerCore playerCore;
 
