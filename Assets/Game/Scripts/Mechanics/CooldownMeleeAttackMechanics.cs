@@ -7,12 +7,13 @@ using UnityEngine;
 [Serializable]
 public class CooldownMeleeAttackMechanics : IAtomicUpdate
 {
+    public AtomicVariable<bool> isEnabled;
+    
     [SerializeField, ReadOnly] private DoDamageMechanics _doDamageMechanics;
     [SerializeField, ReadOnly] private AtomicVariable<AtomicObject> target;
     [SerializeField, ReadOnly] private AtomicVariable<int> damage;
     [SerializeField, ReadOnly] private AtomicVariable<float> coolDown;
 
-    [SerializeField, ReadOnly] private bool isEnabled;
     [SerializeField, ReadOnly] private float coolDownLeft;
 
     public void Construct(DoDamageMechanics doDamageMechanics, AtomicVariable<AtomicObject> target, AtomicVariable<int> damage, AtomicVariable<float> coolDown)
@@ -23,16 +24,6 @@ public class CooldownMeleeAttackMechanics : IAtomicUpdate
         this.coolDown = coolDown;
     }
 
-    public void Stop()
-    {
-        isEnabled = false;
-    }
-
-    public void Start()
-    {
-        isEnabled = true;
-    }
-
     public void OnUpdate(float deltaTime)
     {
         if (coolDownLeft > 0)
@@ -41,7 +32,7 @@ public class CooldownMeleeAttackMechanics : IAtomicUpdate
         }
         else
         {
-            if (!isEnabled) return;
+            if (!isEnabled.Value) return;
             _doDamageMechanics.DoDamage(target.Value, damage.Value);
             coolDownLeft = coolDown.Value;
         }

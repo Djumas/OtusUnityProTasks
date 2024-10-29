@@ -135,6 +135,8 @@ MonoBehaviour:
     rootTransformComponent:
       rootTransform:
         value: {fileID: 3006422773680130874}
+  playerAnimation:
+    _animator: {fileID: 3435628029611942440}
 --- !u!1 &8550233314304206884
 GameObject:
   m_ObjectHideFlags: 0
@@ -2584,6 +2586,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3587277423669050949, guid: 4754efaa13741644aa1a61e4869e2c0d,
         type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 7af80ba91833f5148ba942b3d5f27e8f, type: 2}
+    - target: {fileID: 3587277423669050949, guid: 4754efaa13741644aa1a61e4869e2c0d,
+        type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
@@ -2606,6 +2613,12 @@ PrefabInstance:
 --- !u!4 &1067890634428359185 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1203785381697748604, guid: 4754efaa13741644aa1a61e4869e2c0d,
+    type: 3}
+  m_PrefabInstance: {fileID: 2190258717553286253}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3435628029611942440 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3587277423669050949, guid: 4754efaa13741644aa1a61e4869e2c0d,
     type: 3}
   m_PrefabInstance: {fileID: 2190258717553286253}
   m_PrefabAsset: {fileID: 0}

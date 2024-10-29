@@ -30,12 +30,23 @@ public class Zombie : AtomicObject
 
     private void Awake()
     {
+        //TODO: Перенести логику Core в соответствующий слой
+        
         zombieCore.lifeComponent.Construct();
         zombieCore.lookAtTargetMechanics.Construct(_rotationDirection, _rootTransform, _targetTransform);
         zombieCore.pursueTargetMechanics.Construct(_moveDirection, _targetTransform, _rootTransform);
-        zombieCore.zombieAIController.Construct(this, zombieCore.pursueTargetMechanics, _isDead, _targetTransform,
+        
+        zombieCore.zombieAIController.Construct(
+            zombieCore.pursueTargetMechanics.isEnabled,
+            zombieCore.cooldownMeleeAttackMechanics.isEnabled, 
+            _isDead, 
+            _targetTransform,
             _rootTransform);
-        zombieCore.cooldownMeleeAttackMechanics.Construct(zombieCore.doDamageMechanics, _target, zombieCore.attackParametersComponent.damage,
+        
+        zombieCore.cooldownMeleeAttackMechanics.Construct(
+            zombieCore.doDamageMechanics, 
+            _target, 
+            zombieCore.attackParametersComponent.damage,
             zombieCore.attackParametersComponent.coolDown);
 
         AddLogic(zombieCore.zombieAIController);
@@ -45,16 +56,20 @@ public class Zombie : AtomicObject
         AddLogic(zombieCore.lookAtTargetMechanics);
         AddLogic(zombieCore.pursueTargetMechanics);
         AddLogic(zombieCore.cooldownMeleeAttackMechanics);
+
+        zombieCore.lookAtTargetMechanics.isEnabled.Value = true;
+        
+        _isDead.Subscribe(OnDeath);
+    }
+
+    private void OnDeath(bool value)
+    {
+        zombieCore.lookAtTargetMechanics.isEnabled.Value = false;
     }
 
     private void Update()
     {
         OnUpdate(Time.deltaTime);
-
-        if (_isDead.Value)
-        {
-            this.RemoveAllLogic<IAtomicLogic>();
-        }
     }
 
     private void FixedUpdate()

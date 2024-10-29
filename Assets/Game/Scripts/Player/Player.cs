@@ -13,11 +13,16 @@ public class Player : AtomicObject
     [Get(MoveAPI.RootTransform)] public AtomicVariable<Transform> _rootTransform => playerCore.rootTransformComponent.rootTransform;
     
     [SerializeField] private PlayerCore playerCore;
+    [SerializeField] private PlayerAnimation playerAnimation;
 
     private void Awake()
     {
+        //TODO: Перенести логику Core в соответствующий слой
+        
         playerCore.shootComponent.Construct();
         playerCore.lifeComponent.Construct();
+        
+        playerAnimation.Construct(playerCore);
         
         AddLogic(playerCore.moveComponent);
         AddLogic(playerCore.rotationComponent);

@@ -7,10 +7,11 @@ using UnityEngine;
 [Serializable]
 public class PursueTargetMechanics : IAtomicUpdate
 {
+    public AtomicVariable<bool> isEnabled;
     [SerializeField, ReadOnly] private AtomicVariable<Vector3> moveDirection;
     [SerializeField, ReadOnly] private AtomicVariable<Transform> targetTransform;
     [SerializeField, ReadOnly] private AtomicVariable<Transform> rootTransform;
-    [SerializeField, ReadOnly] private bool isEnabled;
+    
 
     public void Construct(AtomicVariable<Vector3> _moveDirection, AtomicVariable<Transform> _target,
         AtomicVariable<Transform> _root)
@@ -18,22 +19,20 @@ public class PursueTargetMechanics : IAtomicUpdate
         moveDirection = _moveDirection;
         targetTransform = _target;
         rootTransform = _root;
+        
+        isEnabled.Subscribe(OnEnableChanged);
     }
 
-    public void Stop()
-    {
-        moveDirection.Value = Vector3.zero;
-        isEnabled = false;
-    }
 
-    public void Start()
+    public void OnEnableChanged(bool value)
     {
-        isEnabled = true;
+        if (!value) moveDirection.Value = Vector3.zero;
+
     }
 
     public void OnUpdate(float deltaTime)
     {
-        if (!isEnabled) return;
+        if (!isEnabled.Value) return;
         
         if (targetTransform.Value && rootTransform.Value)
         {

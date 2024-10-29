@@ -3,12 +3,14 @@ using Atomic.Elements;
 using Atomic.Objects;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [Serializable]
 public class ZombieAIController : IAtomicUpdate
 {
-    [SerializeField, ReadOnly] private AtomicObject atomicObject;
-    [SerializeField, ReadOnly] private PursueTargetMechanics pursueTargetMechanics;
+    [SerializeField, ReadOnly] private AtomicVariable<bool> enablePursueTargetMechanics;
+    [SerializeField, ReadOnly] private AtomicVariable<bool> enableAttackCooldownMechanics;
+    
     //TODO: Implement attack behavior;
     [SerializeField, ReadOnly] private AtomicVariable<bool> isDead;
     [SerializeField, ReadOnly] private AtomicVariable<Transform> targetTransform;
@@ -18,14 +20,14 @@ public class ZombieAIController : IAtomicUpdate
     [SerializeField] private BehaviorState currentState = BehaviorState.Idle;
 
     public void Construct(
-        AtomicObject _atomicObject,
-        PursueTargetMechanics _pursueTargetMechanics,
+       AtomicVariable<bool> _enablePursueTargetMechanics,
+       AtomicVariable<bool> _enableAttackCooldownMechanics,
         AtomicVariable<bool> _isDead,
         AtomicVariable<Transform> _targetTransform,
         AtomicVariable<Transform> _rootTransform)
     {
-        atomicObject = _atomicObject;
-        pursueTargetMechanics = _pursueTargetMechanics;
+        enablePursueTargetMechanics = _enablePursueTargetMechanics;
+        enableAttackCooldownMechanics = _enableAttackCooldownMechanics;
         isDead = _isDead;
         targetTransform = _targetTransform;
         rootTransform = _rootTransform;
@@ -36,7 +38,8 @@ public class ZombieAIController : IAtomicUpdate
         if (isDead.Value)
         {
             currentState = BehaviorState.Dead;
-            pursueTargetMechanics.Stop();
+            enablePursueTargetMechanics.Value = false;
+            enableAttackCooldownMechanics.Value = false;
         }
         
         if (currentState == BehaviorState.Dead) return;
@@ -45,7 +48,8 @@ public class ZombieAIController : IAtomicUpdate
         {
             if (currentState != BehaviorState.Idle)
             {
-                pursueTargetMechanics.Stop();
+                enablePursueTargetMechanics.Value = false;
+                enableAttackCooldownMechanics.Value = false;
                 currentState = BehaviorState.Idle;
             }
             return;
@@ -56,12 +60,14 @@ public class ZombieAIController : IAtomicUpdate
         {
             if (currentState == BehaviorState.Pursue) return;
             currentState = BehaviorState.Pursue;
-            pursueTargetMechanics.Start();
+            enablePursueTargetMechanics.Value = true;
+            enableAttackCooldownMechanics.Value = false;
         }
         else
         {
             currentState = BehaviorState.Attack;
-            pursueTargetMechanics.Stop();
+            enablePursueTargetMechanics.Value = false;
+            enableAttackCooldownMechanics.Value = true;
         }
     }
 }

@@ -7,10 +7,11 @@ using UnityEngine;
 [Serializable]
 public class LookAtTargetMechanics : IAtomicUpdate
 {
+    public AtomicVariable<bool> isEnabled;
     [SerializeField, ReadOnly] private AtomicVariable<Vector3> rotationDirection;
     [SerializeField, ReadOnly] private AtomicVariable<Transform> root;
     [SerializeField, ReadOnly] private AtomicVariable<Transform> target;
-
+    
     public void Construct(AtomicVariable<Vector3> _rotationDirection, AtomicVariable<Transform> _root, AtomicVariable<Transform> _target)
     {
         rotationDirection = _rotationDirection;
@@ -20,6 +21,10 @@ public class LookAtTargetMechanics : IAtomicUpdate
 
     public void OnUpdate(float deltaTime)
     {
-        if(root.Value && target.Value) rotationDirection.Value = (target.Value.position - root.Value.position).normalized;
+        if (isEnabled.Value)
+        {
+            if (root.Value && target.Value)
+                rotationDirection.Value = (target.Value.position - root.Value.position).normalized;
+        }
     }
 }
