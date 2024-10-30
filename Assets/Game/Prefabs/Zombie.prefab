@@ -112,10 +112,10 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &6486345383869258
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -144,15 +144,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombieCore:
     zombieAIController:
-      atomicObject: {fileID: 0}
-      pursueTargetMechanics:
-        moveDirection:
-          value: {x: 0, y: 0, z: 0}
-        targetTransform:
-          value: {fileID: 0}
-        rootTransform:
-          value: {fileID: 0}
-        isEnabled: 0
+      enablePursueTargetMechanics:
+        value: 0
+      enableAttackCooldownMechanics:
+        value: 0
       isDead:
         value: 0
       targetTransform:
@@ -160,22 +155,24 @@ MonoBehaviour:
       rootTransform:
         value: {fileID: 0}
       stoppingDistance: 1
-      attackCoolDown: 1
       currentState: 0
     moveComponent:
       moveDirection:
         value: {x: 0, y: 0, z: 0}
+      moveDirectionRelative:
+        value: {x: 0, y: 0, z: 0}
+      speed:
+        value: 2
       root: {fileID: 7964997623459932075}
-      speed: 2
     rotationComponent:
       rotationDirection:
         value: {x: 0, y: 0, z: 0}
       root: {fileID: 7964997623459932075}
       enable: 1
     lifeComponent:
-      currentHP: 5
       isDead:
         value: 0
+      currentHP: 1
     rootTransformComponent:
       rootTransform:
         value: {fileID: 7964997623459932075}
@@ -190,6 +187,8 @@ MonoBehaviour:
       coolDown:
         value: 1
     lookAtTargetMechanics:
+      isEnabled:
+        value: 0
       rotationDirection:
         value: {x: 0, y: 0, z: 0}
       root:
@@ -197,22 +196,28 @@ MonoBehaviour:
       target:
         value: {fileID: 0}
     pursueTargetMechanics:
+      isEnabled:
+        value: 0
       moveDirection:
         value: {x: 0, y: 0, z: 0}
       targetTransform:
         value: {fileID: 0}
       rootTransform:
         value: {fileID: 0}
-      isEnabled: 0
     cooldownMeleeAttackMechanics:
+      isEnabled:
+        value: 0
       target:
         value: {fileID: 0}
       damage:
         value: 0
       coolDown:
         value: 0
-      isEnabled: 0
       coolDownLeft: 0
+  zombieAnimation:
+    _animator: {fileID: 4828065441531083015}
+  zombieVFX:
+    _damageVFX: {fileID: 1696610920232104273}
 --- !u!1001 &1696610920246370783
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -306,6 +311,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bf0b90e6d2294a4c8186ac5febf7653, type: 3}
+--- !u!198 &1696610920232104273 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19845262, guid: 9bf0b90e6d2294a4c8186ac5febf7653,
+    type: 3}
+  m_PrefabInstance: {fileID: 1696610920246370783}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1696610920246208439 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 493160, guid: 9bf0b90e6d2294a4c8186ac5febf7653,
@@ -367,6 +378,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 95075453375667064, guid: a3029e28af10f4f458f5d25d6118a906,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 3384dd0984d97fe4ab7c758e0adb072f, type: 2}
     - target: {fileID: 7477056162850146450, guid: a3029e28af10f4f458f5d25d6118a906,
         type: 3}
       propertyPath: m_IsActive
@@ -378,6 +394,12 @@ PrefabInstance:
 --- !u!4 &4782524890436215783 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4376485179048344, guid: a3029e28af10f4f458f5d25d6118a906,
+    type: 3}
+  m_PrefabInstance: {fileID: 4778738596848624255}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4828065441531083015 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95075453375667064, guid: a3029e28af10f4f458f5d25d6118a906,
     type: 3}
   m_PrefabInstance: {fileID: 4778738596848624255}
   m_PrefabAsset: {fileID: 0}

@@ -15,9 +15,7 @@ public class ShootInputController : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            //Debug.Log("ShootMouseDown");
             var shootRequest = player.Get<AtomicEvent>(ShootAPI.ShootRequest);
-            //Debug.Log(shootRequest);
             shootRequest.Invoke();
         }
     }

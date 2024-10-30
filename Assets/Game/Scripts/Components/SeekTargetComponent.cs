@@ -17,13 +17,24 @@ public class SeekTargetComponent : IAtomicUpdate
 
     private void SeekTarget()
     {
-        if (target.Value && targetTransform.Value) return;
+        if (target.Value && targetTransform.Value)
+        {
+            var playerIsDead = target.Value.Get<AtomicVariable<bool>>(LifeAPI.IsDead).Value;
+            if(!playerIsDead) return;
+        }
         
         var targetGO = GameObject.FindGameObjectWithTag("Player");
         
         if (targetGO)
         {
             target.Value = targetGO.GetComponent<AtomicObject>();
+            var playerIsDead = target.Value.Get<AtomicVariable<bool>>(LifeAPI.IsDead).Value;
+            if (playerIsDead)
+            {
+                target.Value = null;
+                targetTransform.Value = null;
+                return;  
+            } 
             targetTransform.Value = target.Value.Get<AtomicVariable<Transform>>(MoveAPI.RootTransform).Value;
             if(!targetTransform.Value) Debug.LogWarning("No root transform found");
         }

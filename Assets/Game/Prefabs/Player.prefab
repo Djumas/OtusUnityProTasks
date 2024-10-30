@@ -80,7 +80,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -114,8 +114,11 @@ MonoBehaviour:
     moveComponent:
       moveDirection:
         value: {x: 0, y: 0, z: 0}
+      moveDirectionRelative:
+        value: {x: 0, y: 0, z: 0}
+      speed:
+        value: 5
       root: {fileID: 3006422773680130874}
-      speed: 5
     rotationComponent:
       rotationDirection:
         value: {x: 0, y: 0, z: 0}
@@ -125,18 +128,29 @@ MonoBehaviour:
       firepoint: {fileID: 1067890634428359185}
       bulletPrefab: {fileID: 7071663250927276774, guid: 7f12394cd99a93a4c8a18e1a0b1cbf06,
         type: 3}
-      coolDown: 0.2
+      bulletDamage: 3
+      bulletSpeed: 20
+      shootCoolDown: 0.5
+      bulletRespawnCoolDown: 2
+      ammoCapacity: 30
       isGunReady: 1
       coolDownLeft: 0
+      bulletCoolDownLeft: 0
+      ammoLeft: 0
     lifeComponent:
-      currentHP: 10
       isDead:
         value: 0
+      currentHP: 10
     rootTransformComponent:
       rootTransform:
         value: {fileID: 3006422773680130874}
+    playerDeathController:
+      player: {fileID: 0}
   playerAnimation:
     _animator: {fileID: 3435628029611942440}
+  playerVFX:
+    _damageVFX: {fileID: 1977376666174438541}
+    _shootVFX: {fileID: 922185958035770484}
 --- !u!1 &8550233314304206884
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,6 +276,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b840149de5449b548821bfc78aa833ea, type: 3}
+--- !u!198 &922185958035770484 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19801142, guid: b840149de5449b548821bfc78aa833ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 922185958021752898}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1977376666189032451
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -431,6 +451,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bf0b90e6d2294a4c8186ac5febf7653, type: 3}
+--- !u!198 &1977376666174438541 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19845262, guid: 9bf0b90e6d2294a4c8186ac5febf7653,
+    type: 3}
+  m_PrefabInstance: {fileID: 1977376666189032451}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1977376666188540523 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 493160, guid: 9bf0b90e6d2294a4c8186ac5febf7653,

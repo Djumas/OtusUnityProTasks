@@ -5,12 +5,11 @@ using UnityEngine;
 [Serializable]
 public class LifeComponent
 {
-    [SerializeField] private int currentHP;
-    
     public AtomicEvent<int> TakeDamageAction;
-    public AtomicEvent DeathEvent;
     public AtomicVariable<bool> isDead;
-
+    
+    [SerializeField] private int currentHP;
+ 
     public void Construct()
     {
         TakeDamageAction.Subscribe(TakeDamage);
@@ -20,11 +19,9 @@ public class LifeComponent
     private void TakeDamage(int damage)
     {
         if(isDead.Value) return;
-        Debug.Log("Damage done");
         currentHP -= damage;
         if (currentHP <= 0)
         {
-            DeathEvent.Invoke();
             isDead.Value = true;
         }
     }

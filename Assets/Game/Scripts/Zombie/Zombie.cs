@@ -27,44 +27,14 @@ public class Zombie : AtomicObject
     public AtomicVariable<Transform> _targetTransform => zombieCore.seekTargetComponent.targetTransform;
 
     [SerializeField] private ZombieCore zombieCore;
+    [SerializeField] private ZombieAnimation zombieAnimation;
+    [SerializeField] private ZombieVFX zombieVFX;
 
     private void Awake()
     {
-        //TODO: Перенести логику Core в соответствующий слой
-        
-        zombieCore.lifeComponent.Construct();
-        zombieCore.lookAtTargetMechanics.Construct(_rotationDirection, _rootTransform, _targetTransform);
-        zombieCore.pursueTargetMechanics.Construct(_moveDirection, _targetTransform, _rootTransform);
-        
-        zombieCore.zombieAIController.Construct(
-            zombieCore.pursueTargetMechanics.isEnabled,
-            zombieCore.cooldownMeleeAttackMechanics.isEnabled, 
-            _isDead, 
-            _targetTransform,
-            _rootTransform);
-        
-        zombieCore.cooldownMeleeAttackMechanics.Construct(
-            zombieCore.doDamageMechanics, 
-            _target, 
-            zombieCore.attackParametersComponent.damage,
-            zombieCore.attackParametersComponent.coolDown);
-
-        AddLogic(zombieCore.zombieAIController);
-        AddLogic(zombieCore.moveComponent);
-        AddLogic(zombieCore.rotationComponent);
-        AddLogic(zombieCore.seekTargetComponent);
-        AddLogic(zombieCore.lookAtTargetMechanics);
-        AddLogic(zombieCore.pursueTargetMechanics);
-        AddLogic(zombieCore.cooldownMeleeAttackMechanics);
-
-        zombieCore.lookAtTargetMechanics.isEnabled.Value = true;
-        
-        _isDead.Subscribe(OnDeath);
-    }
-
-    private void OnDeath(bool value)
-    {
-        zombieCore.lookAtTargetMechanics.isEnabled.Value = false;
+        zombieCore.Construct(this);
+        zombieAnimation.Construct(zombieCore);
+        zombieVFX.Construct(zombieCore);
     }
 
     private void Update()

@@ -8,6 +8,7 @@ using UnityEngine;
 public class CooldownMeleeAttackMechanics : IAtomicUpdate
 {
     public AtomicVariable<bool> isEnabled;
+    public AtomicEvent attackEvent;
     
     [SerializeField, ReadOnly] private DoDamageMechanics _doDamageMechanics;
     [SerializeField, ReadOnly] private AtomicVariable<AtomicObject> target;
@@ -33,6 +34,7 @@ public class CooldownMeleeAttackMechanics : IAtomicUpdate
         else
         {
             if (!isEnabled.Value) return;
+            attackEvent.Invoke();
             _doDamageMechanics.DoDamage(target.Value, damage.Value);
             coolDownLeft = coolDown.Value;
         }

@@ -8,10 +8,12 @@ using UnityEngine.Serialization;
 public class Bullet : AtomicObject
 {
     [Get(MoveAPI.MoveDirection)] public AtomicVariable<Vector3> _moveDirection => _moveComponent.moveDirection;
+    [Get(ShootAPI.BulletDamage)] public AtomicVariable<int> damage;
+    [Get(MoveAPI.MoveSpeed)] public AtomicVariable<float> speed => _moveComponent.speed;
 
     [SerializeField] private MoveComponent _moveComponent;
     [SerializeField] private MoveForwardController moveForwardController;
-    [SerializeField] private int damage;
+    
 
     private readonly DoDamageMechanics _doDamageMechanics = new();
 
@@ -46,10 +48,9 @@ public class Bullet : AtomicObject
             if (isDeadVariable != null)
             {
                 if (atomicObject.GetVariable<bool>(LifeAPI.IsDead).Value) return;
-                _doDamageMechanics.DoDamage(atomicObject, damage);
+                _doDamageMechanics.DoDamage(atomicObject, damage.Value);
             }
         }
-
-        Destroy(gameObject);
+        else Destroy(gameObject);
     }
 }

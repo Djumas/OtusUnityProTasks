@@ -11,4 +11,17 @@ public class PlayerCore
     public ShootComponent shootComponent;
     public LifeComponent lifeComponent;
     public RootTransformComponent rootTransformComponent;
+
+    public PlayerDeathController playerDeathController;
+
+    public void Construct(Player player)
+    {
+        shootComponent.Construct();
+        lifeComponent.Construct();
+        playerDeathController.Construct(lifeComponent.isDead,player);
+        
+        player.AddLogic(moveComponent);
+        player.AddLogic(rotationComponent);
+        player.AddLogic(shootComponent);
+    }
 }

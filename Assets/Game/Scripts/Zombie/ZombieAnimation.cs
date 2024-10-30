@@ -2,24 +2,26 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class PlayerAnimation
+public class ZombieAnimation
 {
     [SerializeField] private Animator _animator;
-    
+
     private int _isMovingHash = Animator.StringToHash("isMoving");
-    private int _xDirectionHash = Animator.StringToHash("XDirection");
-    private int _yDirectionHash = Animator.StringToHash("YDirection");
-    private int _shootHash = Animator.StringToHash("Shoot");
     private int _takeDamageHash = Animator.StringToHash("TakeDamage");
     private int _isDeadHash = Animator.StringToHash("IsDead");
-
-    public void Construct(PlayerCore core)
+    private int _AttackHash = Animator.StringToHash("Attack");
+    
+    public void Construct(ZombieCore core)
     {
         core.moveComponent.moveDirection.Subscribe(OnMoveDirectionChanged);
-        core.moveComponent.moveDirectionRelative.Subscribe(OnMoveDirectionRelativeChanged);
-        core.shootComponent.shootAction.Subscribe(OnShoot);
         core.lifeComponent.TakeDamageAction.Subscribe(OnTakeDamage);
         core.lifeComponent.isDead.Subscribe(OnIsDeadChanged);
+        core.cooldownMeleeAttackMechanics.attackEvent.Subscribe(OnAttack);
+    }
+
+    private void OnAttack()
+    {
+        _animator.SetTrigger(_AttackHash);
     }
 
     private void OnMoveDirectionChanged(Vector3 moveDirection)
@@ -28,14 +30,6 @@ public class PlayerAnimation
         _animator.SetBool(_isMovingHash,isMoving);
     }
     
-    private void OnMoveDirectionRelativeChanged(Vector3 moveDirectionRelative)
-    {
-        var xDirection = moveDirectionRelative.x;
-        var yDirection = moveDirectionRelative.z;
-        _animator.SetFloat(_xDirectionHash,xDirection);
-        _animator.SetFloat(_yDirectionHash,yDirection);
-    }
-
     private void OnTakeDamage(int damage)
     {
         _animator.SetTrigger(_takeDamageHash);
@@ -46,8 +40,4 @@ public class PlayerAnimation
         _animator.SetBool(_isDeadHash,isDead);
     }
 
-    private void OnShoot()
-    {
-        _animator.SetTrigger(_shootHash);
-    }
 }

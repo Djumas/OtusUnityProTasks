@@ -3,7 +3,6 @@ using Atomic.Elements;
 using Atomic.Objects;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [Serializable]
 public class ZombieAIController : IAtomicUpdate
@@ -16,7 +15,6 @@ public class ZombieAIController : IAtomicUpdate
     [SerializeField, ReadOnly] private AtomicVariable<Transform> targetTransform;
     [SerializeField, ReadOnly] private AtomicVariable<Transform> rootTransform;
     [SerializeField] private float stoppingDistance = 1f;
-    [SerializeField] private float attackCoolDown = 1f;
     [SerializeField] private BehaviorState currentState = BehaviorState.Idle;
 
     public void Construct(
