@@ -18,6 +18,8 @@ public class ZombieCore
     public PursueTargetMechanics pursueTargetMechanics;
     public DoDamageMechanics doDamageMechanics;
     public CooldownMeleeAttackMechanics cooldownMeleeAttackMechanics;
+    
+    public UnitDeathController unitDeathController;
 
     public void Construct(Zombie zombie)
     {
@@ -26,6 +28,8 @@ public class ZombieCore
         pursueTargetMechanics.Construct(zombie._moveDirection, zombie._targetTransform, zombie._rootTransform);
         zombieAIController.Construct( pursueTargetMechanics.isEnabled, cooldownMeleeAttackMechanics.isEnabled, zombie._isDead, zombie._targetTransform, zombie._rootTransform);
         cooldownMeleeAttackMechanics.Construct(doDamageMechanics, zombie._target, attackParametersComponent.damage, attackParametersComponent.coolDown);
+        unitDeathController.Construct(lifeComponent.isDead,zombie);
+        
 
         zombie.AddLogic(zombieAIController);
         zombie.AddLogic(moveComponent);

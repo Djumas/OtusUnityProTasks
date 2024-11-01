@@ -2,6 +2,7 @@ using System;
 using Atomic.Elements;
 using Atomic.Objects;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [Serializable]
 public class PlayerCore
@@ -12,13 +13,13 @@ public class PlayerCore
     public LifeComponent lifeComponent;
     public RootTransformComponent rootTransformComponent;
 
-    public PlayerDeathController playerDeathController;
+    public UnitDeathController unitDeathController;
 
     public void Construct(Player player)
     {
         shootComponent.Construct();
         lifeComponent.Construct();
-        playerDeathController.Construct(lifeComponent.isDead,player);
+        unitDeathController.Construct(lifeComponent.isDead,player);
         
         player.AddLogic(moveComponent);
         player.AddLogic(rotationComponent);

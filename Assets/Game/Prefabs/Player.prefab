@@ -91,7 +91,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6378945258768650400}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 256109e5392e8134c91991304b6e62ef, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -144,8 +144,10 @@ MonoBehaviour:
     rootTransformComponent:
       rootTransform:
         value: {fileID: 3006422773680130874}
-    playerDeathController:
-      player: {fileID: 0}
+    unitDeathController:
+      unit: {fileID: 0}
+      playerRG: {fileID: 0}
+      playerCollider: {fileID: 0}
   playerAnimation:
     _animator: {fileID: 3435628029611942440}
   playerVFX:
