@@ -29,12 +29,14 @@ public class Zombie : AtomicObject
     [SerializeField] private ZombieCore zombieCore;
     [SerializeField] private ZombieAnimation zombieAnimation;
     [SerializeField] private ZombieVFX zombieVFX;
+    [SerializeField] private ZombieSFX zombieSFX;
 
     private void Awake()
     {
         zombieCore.Construct(this);
         zombieAnimation.Construct(zombieCore);
         zombieVFX.Construct(zombieCore);
+        zombieSFX.Construct(zombieCore);
     }
 
     private void Update()

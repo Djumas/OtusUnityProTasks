@@ -30,6 +30,7 @@ public class GameOverManager:MonoBehaviour
 
     private IEnumerator WaitAndRestart()
     {
+        Debug.Log("GameOver!");
         Debug.Log($"Waiting for {waitTime} seconds and restart...");
         yield return new WaitForSeconds(waitTime);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

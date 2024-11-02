@@ -17,12 +17,14 @@ public class Player : AtomicObject
     [SerializeField] private PlayerCore playerCore;
     [SerializeField] private PlayerAnimation playerAnimation;
     [SerializeField] private PlayerVFX playerVFX;
+    [SerializeField] private PlayerSFX playerSFX;
 
     private void Awake()
     {
         playerCore.Construct(this);
         playerAnimation.Construct(playerCore);
         playerVFX.Construct(playerCore);
+        playerSFX.Construct(playerCore);
     }
 
     private void FixedUpdate()
